@@ -1,8 +1,13 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
-export default class Navbar extends React.Component {
+import logo from "./logo.svg";
+import NavLink from "./NavLink";
+
+export class Navbar extends Component {
   render() {
+    const { location } = this.props;
     return (
       <nav className="navbar navbar-default navbar-pf">
         <div className="navbar-header">
@@ -17,14 +22,18 @@ export default class Navbar extends React.Component {
             <span className="icon-bar" />
             <span className="icon-bar" />
           </button>
-          <a className="navbar-brand" href="/reports/">
+          <Link
+            to="/playbooks"
+            id="navbar-navbar-header__playbooks-link"
+            className="navbar-brand"
+          >
             <img
               src={logo}
               alt="ARA: Ansible Run Analysis"
               width="81"
               height="32"
             />
-          </a>
+          </Link>
         </div>
         <div className="collapse navbar-collapse navbar-collapse-1">
           <ul className="nav navbar-nav navbar-utility">
@@ -66,15 +75,17 @@ export default class Navbar extends React.Component {
             </li>
           </ul>
           <ul className="nav navbar-nav navbar-primary">
-            <li className="active">
-              <a href="/reports/">Playbook reports</a>
-            </li>
-            <li>
-              <a href="/about/">About</a>
-            </li>
+            <NavLink id="playbooks" to="/playbooks" location={location}>
+              Playbooks reports
+            </NavLink>
+            <NavLink id="about" to="/about" location={location}>
+              About
+            </NavLink>
           </ul>
         </div>
       </nav>
     );
   }
 }
+
+export default withRouter(Navbar);
