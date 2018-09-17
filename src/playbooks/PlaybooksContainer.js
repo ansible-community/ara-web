@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { ListView } from "patternfly-react";
+
 import { MainContainer } from "../containers";
 import { getPlaybooks } from "./playbooksActions";
+import Playbook from "./Playbook";
 
 export class PlaybooksContainer extends Component {
   componentDidMount() {
@@ -11,12 +14,11 @@ export class PlaybooksContainer extends Component {
     const { playbooks } = this.props;
     return (
       <MainContainer>
-        <p>playbooks</p>
-        <ul>
+        <ListView>
           {playbooks.map(playbook => (
-            <li key={playbook.id}>{playbook.id}</li>
+            <Playbook key={playbook.id} playbook={playbook} />
           ))}
-        </ul>
+        </ListView>
       </MainContainer>
     );
   }
