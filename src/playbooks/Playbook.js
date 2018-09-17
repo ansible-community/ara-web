@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, ListView, Icon } from "patternfly-react";
+import { Link } from "react-router-dom";
+import PlaybookParameters from "./PlaybookParameters";
 
 export default class Playbook extends Component {
   constructor(props) {
@@ -41,9 +43,9 @@ export default class Playbook extends Component {
     return (
       <ListView.Item
         checkboxInput={
-          <a href="#">
+          <Link to={`/playbooks/${playbook.id}`} className="navbar-brand">
             <Icon name="link" />
-          </a>
+          </Link>
         }
         leftContent={LeftIcon}
         additionalInfo={[
@@ -80,14 +82,24 @@ export default class Playbook extends Component {
             <ListView.Icon name="clock-o" /> {Math.round(playbook.duration)} sec
           </span>
         }
-        heading={playbook.name ? playbook.name : playbook.file.path.split("/").slice(-1)[0]}
+        heading={
+          playbook.name
+            ? playbook.name
+            : playbook.file.path.split("/").slice(-1)[0]
+        }
         stacked={false}
         compoundExpand
         compoundExpanded={expanded}
         onCloseCompoundExpand={() => this.setState({ expanded: false })}
       >
         <Row>
-          <Col sm={11}>{selection}</Col>
+          <Col xs={12} sm={8} smOffset={2} md={6} mdOffset={3}>
+            {selection === "parameters" ? (
+              <PlaybookParameters playbook={playbook} />
+            ) : (
+              selection
+            )}
+          </Col>
         </Row>
       </ListView.Item>
     );
