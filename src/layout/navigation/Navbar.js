@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
@@ -7,7 +8,8 @@ import NavLink from "./NavLink";
 
 export class Navbar extends Component {
   render() {
-    const { location } = this.props;
+    const { location, config } = this.props;
+    const { ara_version, ansible_version, python_version } = config;
     return (
       <nav className="navbar navbar-default navbar-pf">
         <div className="navbar-header">
@@ -46,33 +48,39 @@ export class Navbar extends Component {
                 Documentation
               </a>
             </li>
-            <li>
-              <a
-                href="https://github.com/openstack/ara"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <strong>ARA</strong> 1.0.0
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.ansible.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <strong>Ansible</strong> 2.3.1.0
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.python.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <strong>Python</strong> 2.7
-              </a>
-            </li>
+            {ara_version ? (
+              <li>
+                <a
+                  href="https://github.com/openstack/ara"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>ARA</strong> {ara_version}
+                </a>
+              </li>
+            ) : null}
+            {ansible_version ? (
+              <li>
+                <a
+                  href="https://www.ansible.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>Ansible</strong> {ansible_version}
+                </a>
+              </li>
+            ) : null}
+            {python_version ? (
+              <li>
+                <a
+                  href="https://www.python.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>Python</strong> {python_version}
+                </a>
+              </li>
+            ) : null}
           </ul>
           <ul className="nav navbar-nav navbar-primary">
             <NavLink id="playbooks" to="/playbooks" location={location}>
@@ -88,4 +96,10 @@ export class Navbar extends Component {
   }
 }
 
-export default withRouter(Navbar);
+function mapStateToProps(state) {
+  return {
+    config: state.config
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(Navbar));

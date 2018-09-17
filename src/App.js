@@ -16,7 +16,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    store.dispatch(setConfig({ apiURL: "http://localhost:8000" }));
+    store.dispatch(
+      setConfig({
+        apiURL: "http://localhost:8000",
+        ara_version: "1.0.0",
+        ansible_version: "2.6",
+        python_version: "3.6"
+      })
+    );
     this.setState({ loading: false });
   }
 
