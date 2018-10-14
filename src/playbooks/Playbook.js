@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, ListView, Icon } from "patternfly-react";
 import { Link } from "react-router-dom";
-import PlaybookParameters from "./PlaybookParameters";
+import PlaybookArgs from "./PlaybookArgs";
 
 export default class Playbook extends Component {
   constructor(props) {
@@ -49,13 +49,13 @@ export default class Playbook extends Component {
         }
         leftContent={LeftIcon}
         additionalInfo={[
-          <ListView.InfoItem key="parameters">
+          <ListView.InfoItem key="args">
             <ListView.Expand
-              expanded={expanded && selection === "parameters"}
-              toggleExpanded={() => this._toggleExpanded("parameters")}
+              expanded={expanded && selection === "args"}
+              toggleExpanded={() => this._toggleExpanded("args")}
             >
               <Icon name="cogs" />
-              Parameters
+              Arguments
             </ListView.Expand>
           </ListView.InfoItem>,
           <ListView.InfoItem key="hosts">
@@ -94,8 +94,8 @@ export default class Playbook extends Component {
       >
         <Row>
           <Col xs={12} sm={8} smOffset={2} md={6} mdOffset={3}>
-            {selection === "parameters" ? (
-              <PlaybookParameters playbook={playbook} />
+            {selection === "args" ? (
+              <PlaybookArgs playbook={playbook} />
             ) : (
               selection
             )}

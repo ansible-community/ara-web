@@ -9,15 +9,15 @@ export class ParamatersHelpIcon extends Component {
           overlay={
             <Tooltip id="tooltip">
               <div>
-                <h3>Tips: Parameters</h3>
+                <h3>Tips: Arguments</h3>
                 <hr />
                 <p>
-                  This panel contains all the parameters and options passed to
+                  This panel contains all the arguments and options passed to
                   the ansible-playbook command.
                 </p>
                 <p>
-                  You can control which parameters ARA should ignore with the{" "}
-                  <code>ARA_IGNORE_PARAMETERS</code> configuration.
+                  You can control which arguments ARA should ignore with the{" "}
+                  <code>ignored_arguments</code> configuration.
                 </p>
               </div>
             </Tooltip>
@@ -31,7 +31,7 @@ export class ParamatersHelpIcon extends Component {
   }
 }
 
-export default class PlaybookParameters extends Component {
+export default class PlaybookArgs extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,20 +39,20 @@ export default class PlaybookParameters extends Component {
     };
   }
 
-  _renderParameter = parameter => {
-    if (parameter instanceof Array) {
-      return parameter.join(", ");
+  _renderArg = arg => {
+    if (arg instanceof Array) {
+      return arg.join(", ");
     } else {
-      return parameter;
+      return arg;
     }
   };
 
   render() {
     const { playbook } = this.props;
     const { search } = this.state;
-    const parameters = Object.keys(playbook.parameters);
-    const filteredParameters = parameters.filter(
-      parameter => parameter.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    const args = Object.keys(playbook.arguments);
+    const filteredArgs = args.filter(
+      arg => arg.toLowerCase().indexOf(search.toLowerCase()) !== -1
     );
     console.log(search);
     return (
@@ -61,30 +61,30 @@ export default class PlaybookParameters extends Component {
           <div className="dataTables_filter">
             <input
               className="form-control"
-              placeholder="Search a parameter"
+              placeholder="Search an argument"
               type="search"
               value={search}
               onChange={e => this.setState({ search: e.target.value })}
             />
           </div>
           <div className="dataTables_info">
-            Showing <b>{filteredParameters.length}</b> of{" "}
-            <b>{parameters.length}</b> parameters
+            Showing <b>{filteredArgs.length}</b> of{" "}
+            <b>{args.length}</b> args
             <ParamatersHelpIcon />
           </div>
         </div>
         <table className="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th>Parameter</th>
+              <th>Argument</th>
               <th>Value</th>
             </tr>
           </thead>
           <tbody>
-            {filteredParameters.map((parameter, i) => (
+            {filteredArgs.map((arg, i) => (
               <tr key={i}>
-                <td>{parameter}</td>
-                <td>{this._renderParameter(playbook.parameters[parameter])}</td>
+                <td>{arg}</td>
+                <td>{this._renderArg(playbook.arguments[arg])}</td>
               </tr>
             ))}
           </tbody>
