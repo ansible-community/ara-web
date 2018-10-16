@@ -44,7 +44,7 @@ export default class Playbook extends Component {
       <ListView.Item
         checkboxInput={
           <Link to={`/playbooks/${playbook.id}`} className="navbar-brand">
-            <Icon name="link" />
+            <Icon name="link" size="lg" />
           </Link>
         }
         leftContent={LeftIcon}
@@ -79,7 +79,7 @@ export default class Playbook extends Component {
         ]}
         actions={
           <span>
-            <ListView.Icon name="clock-o" /> {Math.round(playbook.duration)} sec
+            <Icon name="clock-o" size="lg" /> {Math.round(playbook.duration)} sec
           </span>
         }
         heading={
