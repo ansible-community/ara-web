@@ -22,24 +22,53 @@ export default class Playbook extends Component {
     });
   };
 
+  _getStatusMetadata(status) {
+    switch(status) {
+      case "running":
+        return {
+          "name": "running",
+          "title": "Playbook is in progress.",
+          "className": "pficon pficon-info list-view-pf-icon-md list-view-pf-icon-info"
+        }
+      case "completed":
+        return {
+          "name": "completed",
+          "title": "Playbook has completed successfully.",
+          "className": "pficon pficon-ok list-view-pf-icon-md list-view-pf-icon-success"
+        }
+      case "failed":
+        return {
+          "name": "failed",
+          "title": "Playbook has failed with one or more errors.",
+          "className": "pficon pficon-error-circle-o list-view-pf-icon-md list-view-pf-icon-danger"
+        }
+      case "unknown":
+        return {
+          "name": "unknown",
+          "title": "Playbook's status is unknown.",
+          "className": "pficon pficon-warning-triangle-o list-view-pf-icon-md list-view-pf-icon-warning"
+        }
+      default:
+        return {
+          "name": "unknown",
+          "title": "Playbook's status is unknown.",
+          "className": "pficon pficon-warning-triangle-o list-view-pf-icon-md list-view-pf-icon-warning"
+        }
+     }
+  }
+
   render() {
     const { playbook } = this.props;
     const { expanded, selection } = this.state;
-    const LeftIcon = playbook.completed ? (
+    const status_metadata = this._getStatusMetadata(playbook.status);
+    const LeftIcon =
       <ListView.Icon
-        name="check"
+        name={status_metadata["name"]}
         size="md"
-        title="Playbook completed successfully"
-        className="list-view-pf-icon-success"
+        title={status_metadata["title"]}
+        className={status_metadata["className"]}
       />
-    ) : (
-      <ListView.Icon
-        name="info"
-        title="Playbook execution is either in progress or was interrupted: data will be inconsistent"
-        size="md"
-        className="list-view-pf-icon-info"
-      />
-    );
+
     return (
       <ListView.Item
         checkboxInput={
