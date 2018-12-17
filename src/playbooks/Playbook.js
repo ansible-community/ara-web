@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Row, Col, ListView, Icon } from "patternfly-react";
 import { Link } from "react-router-dom";
 import PlaybookArgs from "./PlaybookArgs";
+import PlaybookHosts from "./PlaybookHosts";
+import PlaybookFiles from "./PlaybookFiles";
 
 export default class Playbook extends Component {
   constructor(props) {
@@ -123,11 +125,9 @@ export default class Playbook extends Component {
       >
         <Row>
           <Col xs={12} sm={8} smOffset={2} md={6} mdOffset={3}>
-            {selection === "args" ? (
-              <PlaybookArgs playbook={playbook} />
-            ) : (
-              selection
-            )}
+            {selection === "args" && <PlaybookArgs playbook={playbook} />}
+            {selection === "hosts" && <PlaybookHosts playbook={playbook} />}
+            {selection === "files" && <PlaybookFiles playbook={playbook} />}
           </Col>
         </Row>
       </ListView.Item>

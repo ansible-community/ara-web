@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { OverlayTrigger, Tooltip, Icon } from "patternfly-react";
 
-export class ParamatersHelpIcon extends Component {
+export class HostsHelpIcon extends Component {
   render() {
     return (
       <span style={{ float: "right" }}>
@@ -9,15 +9,10 @@ export class ParamatersHelpIcon extends Component {
           overlay={
             <Tooltip id="tooltip">
               <div>
-                <h3>Tips: Arguments</h3>
+                <h3>Tips: Hosts</h3>
                 <hr />
                 <p>
-                  This panel contains all the arguments and options passed to
-                  the ansible-playbook command.
-                </p>
-                <p>
-                  You can control which arguments ARA should ignore with the{" "}
-                  <code>ignored_arguments</code> configuration.
+                  This panel contains all the hosts involved in the playbook.
                 </p>
               </div>
             </Tooltip>
@@ -31,7 +26,7 @@ export class ParamatersHelpIcon extends Component {
   }
 }
 
-export default class PlaybookArgs extends Component {
+export default class PlaybookHosts extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,20 +34,11 @@ export default class PlaybookArgs extends Component {
     };
   }
 
-  _renderArg = arg => {
-    if (arg instanceof Array) {
-      return arg.join(", ");
-    } else {
-      return arg;
-    }
-  };
-
   render() {
     const { playbook } = this.props;
     const { search } = this.state;
-    const args = Object.keys(playbook.arguments);
-    const filteredArgs = args.filter(
-      arg => arg.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    const filteredHosts = playbook.hosts.filter(
+      host => host.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
     );
     return (
       <div className="table-response">
@@ -60,30 +46,30 @@ export default class PlaybookArgs extends Component {
           <div className="dataTables_filter">
             <input
               className="form-control"
-              placeholder="Search an argument"
+              placeholder="Search a host"
               type="search"
               value={search}
               onChange={e => this.setState({ search: e.target.value })}
             />
           </div>
           <div className="dataTables_info">
-            Showing <b>{filteredArgs.length}</b> of{" "}
-            <b>{args.length}</b> args
-            <ParamatersHelpIcon />
+            Showing <b>{filteredHosts.length}</b> of{" "}
+            <b>{playbook.hosts.length}</b> hosts
+            <HostsHelpIcon />
           </div>
         </div>
         <table className="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th>Argument</th>
-              <th>Value</th>
+              <th>Name</th>
+              <th>Alias</th>
             </tr>
           </thead>
           <tbody>
-            {filteredArgs.map((arg, i) => (
-              <tr key={i}>
-                <td>{arg}</td>
-                <td>{this._renderArg(playbook.arguments[arg])}</td>
+            {filteredHosts.map(host => (
+              <tr key={host.id}>
+                <td>{host.name}</td>
+                <td>{host.alias}</td>
               </tr>
             ))}
           </tbody>
