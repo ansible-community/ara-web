@@ -1,9 +1,58 @@
 import React, { Component } from "react";
-import { Row, Col, ListView, Icon } from "patternfly-react";
-import { Link } from "react-router-dom";
 import PlaybookArgs from "./PlaybookArgs";
 import PlaybookHosts from "./PlaybookHosts";
 import PlaybookFiles from "./PlaybookFiles";
+import styled from "styled-components";
+
+function _getIconInfo(status) {
+  switch (status) {
+    case "running":
+      return {
+        title: "Playbook is in progress.",
+        icon: "fa-pause",
+        color: "blue"
+      };
+    case "completed":
+      return {
+        title: "Playbook has completed successfully.",
+        icon: "fa-check",
+        color: "green"
+      };
+    case "failed":
+      return {
+        title: "Playbook has failed with one or more errors.",
+        icon: "fa-warning",
+        color: "red"
+      };
+    default:
+      return {
+        title: "Playbook's status is unknown.",
+        icon: "fa-warning",
+        color: "red"
+      };
+  }
+}
+
+const IconWrapper = styled.i`
+  color: ${props => props.color};
+`;
+
+class StatusIcon extends Component {
+  render() {
+    const { status } = this.props;
+    const iconInfo = _getIconInfo(status);
+    return (
+      <IconWrapper
+        color={iconInfo.color}
+        className={`fas ${iconInfo.icon}`}
+        title={iconInfo.title}
+      />
+    );
+  }
+}
+const DataListCell = styled.div`
+  cursor: pointer;
+`;
 
 export default class Playbook extends Component {
   constructor(props) {
@@ -17,120 +66,74 @@ export default class Playbook extends Component {
   _toggleExpanded = selection => {
     this.setState(prevState => {
       if (selection === prevState.selection) {
-        return { expanded: !prevState.expanded };
+        return { expanded: !prevState.expanded, selection: null };
       } else {
         return { expanded: true, selection };
       }
     });
   };
 
-  _getStatusMetadata(status) {
-    switch(status) {
-      case "running":
-        return {
-          "name": "running",
-          "title": "Playbook is in progress.",
-          "className": "pficon pficon-info list-view-pf-icon-md list-view-pf-icon-info"
-        }
-      case "completed":
-        return {
-          "name": "completed",
-          "title": "Playbook has completed successfully.",
-          "className": "pficon pficon-ok list-view-pf-icon-md list-view-pf-icon-success"
-        }
-      case "failed":
-        return {
-          "name": "failed",
-          "title": "Playbook has failed with one or more errors.",
-          "className": "pficon pficon-error-circle-o list-view-pf-icon-md list-view-pf-icon-danger"
-        }
-      case "unknown":
-        return {
-          "name": "unknown",
-          "title": "Playbook's status is unknown.",
-          "className": "pficon pficon-warning-triangle-o list-view-pf-icon-md list-view-pf-icon-warning"
-        }
-      default:
-        return {
-          "name": "unknown",
-          "title": "Playbook's status is unknown.",
-          "className": "pficon pficon-warning-triangle-o list-view-pf-icon-md list-view-pf-icon-warning"
-        }
-     }
-  }
-
   render() {
     const { playbook } = this.props;
     const { expanded, selection } = this.state;
-    const status_metadata = this._getStatusMetadata(playbook.status);
-    const LeftIcon =
-      <ListView.Icon
-        name={status_metadata["name"]}
-        size="md"
-        title={status_metadata["title"]}
-        className={status_metadata["className"]}
-      />
-
     return (
-      <ListView.Item
-        checkboxInput={
-          <Link to={`/playbooks/${playbook.id}`} className="navbar-brand">
-            <Icon name="link" size="lg" />
-          </Link>
-        }
-        leftContent={LeftIcon}
-        additionalInfo={[
-          <ListView.InfoItem key="args">
-            <ListView.Expand
-              expanded={expanded && selection === "args"}
-              toggleExpanded={() => this._toggleExpanded("args")}
-            >
-              <Icon name="cogs" />
-              Arguments
-            </ListView.Expand>
-          </ListView.InfoItem>,
-          <ListView.InfoItem key="hosts">
-            <ListView.Expand
-              expanded={expanded && selection === "hosts"}
-              toggleExpanded={() => this._toggleExpanded("hosts")}
-            >
-              <Icon name="server" />
-              <b>{playbook.hosts.length}</b> Hosts
-            </ListView.Expand>
-          </ListView.InfoItem>,
-          <ListView.InfoItem key="files">
-            <ListView.Expand
-              expanded={expanded && selection === "files"}
-              toggleExpanded={() => this._toggleExpanded("files")}
-            >
-              <Icon name="folder-open" />
-              <b>{playbook.files.length}</b> Files
-            </ListView.Expand>
-          </ListView.InfoItem>
-        ]}
-        actions={
-          <span>
-            <Icon name="clock-o" size="lg" /> {Math.round(playbook.duration)} sec
-          </span>
-        }
-        heading={
-          playbook.name
-            ? playbook.name
-            : playbook.file.path.split("/").slice(-1)[0]
-        }
-        stacked={false}
-        compoundExpand
-        compoundExpanded={expanded}
-        onCloseCompoundExpand={() => this.setState({ expanded: false })}
-      >
-        <Row>
-          <Col xs={12} sm={8} smOffset={2} md={6} mdOffset={3}>
+      <ul className="pf-c-data-list pf-u-box-shadow-md">
+        <li
+          className={`pf-c-data-list__item ${expanded ? "pf-m-expanded" : ""}`}
+        >
+          <div className="pf-c-data-list__check">
+            <StatusIcon status={playbook.status} />
+          </div>
+          <DataListCell className="pf-c-data-list__cell pf-m-flex-5">
+            {playbook.file.path.split("/").slice(-1)[0]}
+          </DataListCell>
+          <DataListCell
+            className="pf-c-data-list__cell pf-m-flex-1"
+            onClick={() => this._toggleExpanded("args")}
+          >
+            <i
+              className={`fas fa-angle-${
+                selection === "args" ? "down" : "right"
+              } pf-u-mr-xs`}
+            />
+            <b>{Object.keys(playbook.arguments).length}</b> arguments
+          </DataListCell>
+          <DataListCell
+            className="pf-c-data-list__cell pf-m-flex-1"
+            onClick={() => this._toggleExpanded("hosts")}
+          >
+            <i
+              className={`fas fa-angle-${
+                selection === "hosts" ? "down" : "right"
+              } pf-u-mr-xs`}
+            />
+            <b>{playbook.hosts.length}</b> Hosts
+          </DataListCell>
+          <DataListCell
+            className="pf-c-data-list__cell pf-m-flex-1"
+            onClick={() => this._toggleExpanded("files")}
+          >
+            <i
+              className={`fas fa-angle-${
+                selection === "files" ? "down" : "right"
+              } pf-u-mr-xs`}
+            />
+            <b>{playbook.files.length}</b> Files
+          </DataListCell>
+          <DataListCell className="pf-c-data-list__cell pf-u-text-align-right">
+            <i className={`fas fa-clock pf-u-mr-xs`} />
+            {Math.round(playbook.duration)} sec
+          </DataListCell>
+          <section
+            className="pf-c-data-list__expandable-content"
+            aria-label="Primary Content Details"
+          >
             {selection === "args" && <PlaybookArgs playbook={playbook} />}
             {selection === "hosts" && <PlaybookHosts playbook={playbook} />}
             {selection === "files" && <PlaybookFiles playbook={playbook} />}
-          </Col>
-        </Row>
-      </ListView.Item>
+          </section>
+        </li>
+      </ul>
     );
   }
 }

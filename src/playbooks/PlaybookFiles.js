@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { Button, Icon, Modal } from "patternfly-react";
+import styled from "styled-components";
+
+const ModalBox = styled.div`
+  position: absolute;
+`;
 
 export default class PlaybookFiles extends Component {
   state = {
@@ -16,48 +20,52 @@ export default class PlaybookFiles extends Component {
     const { playbook } = this.props;
     const { showModal, filePath, fileContent } = this.state;
     return (
-      <div className="table-response">
-        <Modal show={showModal} onHide={this.close} bsSize="large">
-          <Modal.Header>
-            <button
-              className="close"
-              onClick={this.close}
-              aria-hidden="true"
-              aria-label="Close"
+      <div>
+        {showModal && (
+          <ModalBox>
+            <div
+              className="pf-c-modal-box pf-m-lg"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
+              aria-describedby="modal-description"
             >
-              <Icon type="pf" name="close" />
-            </button>
-            <Modal.Title>{filePath}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <pre>
-              <code>{fileContent}</code>
-            </pre>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              bsStyle="default"
-              className="btn-cancel"
-              onClick={this.close}
-            >
-              close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        <table className="table table-striped table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+              <div className="pf-c-modal-box__close">
+                <button
+                  className="pf-c-button pf-m-plain"
+                  aria-label="Close"
+                  onClick={this.close}
+                >
+                  <i className="fas fa-times" aria-hidden="true" />
+                </button>
+              </div>
+              <header className="pf-c-modal-box__header">
+                <h1 className="pf-c-modal-box__header-title" id="modal-title">
+                  {filePath}
+                </h1>
+              </header>
+              <div className="pf-c-modal-box__body" id="modal-description">
+                <pre>
+                  <code>{fileContent}</code>
+                </pre>
+              </div>
+              <footer className="pf-c-modal-box__footer">
+                <button type="button" onClick={this.close}>
+                  close
+                </button>
+              </footer>
+            </div>
+          </ModalBox>
+        )}
+        <table className="pf-c-table pf-m-compact pf-m-grid-md" role="grid">
           <tbody>
             {playbook.files.map(file => (
               <tr key={file.id}>
                 <td>{file.path}</td>
-                <td className="text-center">
-                  <Button
-                    bsStyle="primary"
+                <td>
+                  <button
+                    type="button"
+                    className="pf-c-button pf-m-secondary"
                     onClick={() =>
                       this.setState({
                         showModal: true,
@@ -66,8 +74,8 @@ export default class PlaybookFiles extends Component {
                       })
                     }
                   >
-                    <Icon name="eye" />
-                  </Button>
+                    See content
+                  </button>
                 </td>
               </tr>
             ))}

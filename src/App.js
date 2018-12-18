@@ -2,57 +2,42 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import "./App.css";
+import "@patternfly/patternfly-next/patternfly.css";
 import store from "./store";
 import { setConfig } from "./config/configActions";
 import * as Containers from "./containers";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true
-    };
-  }
+  state = {
+    isLoading: true
+  };
 
   componentDidMount() {
     store.dispatch(
       setConfig({
-        apiURL: "http://localhost:8000",
-        ara_version: "1.0.0",
-        ansible_version: "2.6",
-        python_version: "3.6"
+        apiURL: "http://localhost:8000"
       })
     );
-    this.setState({ loading: false });
+    this.setState({ isLoading: false });
   }
 
   render() {
+    const { isLoading } = this.state;
+    if (isLoading) return null;
     return (
-      <div className="App">
-        {this.state.loading ? (
-          <Containers.LoadingContainer />
-        ) : (
-          <Provider store={store}>
-            <BrowserRouter>
-              <Switch>
-                <Redirect from="/" exact to="/playbooks" />
-                <Route
-                  path="/playbooks"
-                  exact
-                  component={Containers.PlaybooksContainer}
-                />
-                <Route
-                  path="/about"
-                  exact
-                  component={Containers.AboutContainer}
-                />
-                <Route component={Containers.Container404} />
-              </Switch>
-            </BrowserRouter>
-          </Provider>
-        )}
-      </div>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Redirect from="/" exact to="/playbooks" />
+            <Route
+              path="/playbooks"
+              exact
+              component={Containers.PlaybooksContainer}
+            />
+            <Route component={Containers.Container404} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }

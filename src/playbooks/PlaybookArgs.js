@@ -1,35 +1,4 @@
 import React, { Component } from "react";
-import { OverlayTrigger, Tooltip, Icon } from "patternfly-react";
-
-export class ParamatersHelpIcon extends Component {
-  render() {
-    return (
-      <span style={{ float: "right" }}>
-        <OverlayTrigger
-          overlay={
-            <Tooltip id="tooltip">
-              <div>
-                <h3>Tips: Arguments</h3>
-                <hr />
-                <p>
-                  This panel contains all the arguments and options passed to
-                  the ansible-playbook command.
-                </p>
-                <p>
-                  You can control which arguments ARA should ignore with the{" "}
-                  <code>ignored_arguments</code> configuration.
-                </p>
-              </div>
-            </Tooltip>
-          }
-          placement="bottom"
-        >
-          <Icon name="question-circle" />
-        </OverlayTrigger>
-      </span>
-    );
-  }
-}
 
 export default class PlaybookArgs extends Component {
   constructor(props) {
@@ -55,35 +24,28 @@ export default class PlaybookArgs extends Component {
       arg => arg.toLowerCase().indexOf(search.toLowerCase()) !== -1
     );
     return (
-      <div className="table-response">
-        <div className="dataTables_header">
-          <div className="dataTables_filter">
+      <div>
+        <div className="pf-l-grid pf-m-gutter pf-u-display-flex pf-u-align-items-center">
+          <div className="pf-l-grid__item">
             <input
-              className="form-control"
+              className="pf-c-form-control"
               placeholder="Search an argument"
               type="search"
               value={search}
               onChange={e => this.setState({ search: e.target.value })}
             />
           </div>
-          <div className="dataTables_info">
-            Showing <b>{filteredArgs.length}</b> of{" "}
-            <b>{args.length}</b> args
-            <ParamatersHelpIcon />
+          <div className="pf-l-grid__item">
+            {`Showing  ${filteredArgs.length} of ${args.length} args`}
           </div>
         </div>
-        <table className="table table-striped table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>Argument</th>
-              <th>Value</th>
-            </tr>
-          </thead>
+
+        <table className="pf-c-table pf-m-compact pf-m-grid-md" role="grid">
           <tbody>
             {filteredArgs.map((arg, i) => (
               <tr key={i}>
-                <td>{arg}</td>
-                <td>{this._renderArg(playbook.arguments[arg])}</td>
+                <td className="pf-m-width-30">{arg}</td>
+                <td className="pf-m-width-70">{this._renderArg(playbook.arguments[arg])}</td>
               </tr>
             ))}
           </tbody>

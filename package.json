@@ -2,17 +2,18 @@
   "name": "ara-web",
   "version": "1.0.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
+    "@patternfly/patternfly-next": "1.0.105",
     "axios": "^0.18.0",
-    "patternfly": "^3.54.2",
-    "patternfly-react": "^2.17.3",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^1.1.5",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
