@@ -1,0 +1,39 @@
+- name: Set up package.json and config.json for CI with Zuul
+  hosts: all
+  vars:
+    config:
+      apiURL: "https://api.demo.recordsansible.org"
+    project_dir: "{{ ansible_user_dir }}/{{ zuul.project.src_dir }}"
+  tasks:
+    # Before building the application, we need to:
+    #  1) Set the homepage argument from package.json to use the URL where logs will be uploaded.
+    #  2) Set the API server in public/config.json to use api.demo.recordsansible.org
+    - name: Resolve Zuul log path
+      include_role:
+        name: set-zuul-log-path-fact
+
+    - name: Read package.json
+      command: "cat {{ project_dir }}/package.json"
+      register: package_json
+
+    - name: Set homepage parameter
+      vars:
+        build_url: "http://logs.openstack.org/{{ zuul_log_path }}/npm/html/"
+      set_fact:
+        package_json: "{{ package_json.stdout | from_json | combine({'homepage': build_url}) }}"
+
+    - name: Write package.json
+      copy:
+        content: "{{ package_json | to_nice_json }}"
+        dest: "{{ project_dir }}/package.json"
+
+    - name: Set config.json to use api.demo.recordsansible.org
+      copy:
+        content: "{{ config | to_nice_json }}"
+        dest: "{{ project_dir }}/public/config.json"
+
+    - name: Read files for debug purposes
+      command: "cat {{ item }}"
+      loop:
+        - "{{ project_dir }}/package.json"
+        - "{{ project_dir }}/public/config.json"

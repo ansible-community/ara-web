@@ -1,0 +1,29 @@
+- job:
+    name: ara-build-dashboard
+    # https://zuul.openstack.org/job/build-javascript-content
+    parent: build-javascript-content
+    description: |
+      Uses a Ubuntu Xenial VM with Node 8 to run "npm run build" and make the
+      results available for browsing during code review on review.openstack.org.
+      It sets the homepage parameter from package.json to the URL where logs will
+      be uploaded and configures the API server to api.demo.recordsansible.org.
+    success-url: 'npm/html/'
+    files:
+      - public/.*
+      - src/.*
+      - .zuul.yaml
+      - zuul-playbooks/.*
+    vars:
+      node_version: 8
+      npm_command: build
+      javascript_content_dir: build
+    pre-run: zuul-playbooks/pre.yaml
+    run: zuul-playbooks/build-dashboard.yaml
+
+- project:
+    check:
+      jobs:
+        - ara-build-dashboard
+    gate:
+      jobs:
+        - ara-build-dashboard

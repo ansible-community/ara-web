@@ -1,0 +1,7 @@
+- name: Build ARA web dashboard with Zuul
+  hosts: all
+  roles:
+    - revoke-sudo
+    - set-zuul-log-path-fact
+    - role: npm
+      npm_command: build
