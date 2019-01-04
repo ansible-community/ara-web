@@ -2,34 +2,32 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
 
-import { MainContainer } from "../containers";
+import { LoadingContainer } from "../containers";
 import { getPlaybooks } from "./playbooksActions";
-import Playbook from "./Playbook";
+import PlaybookSummary from "./PlaybookSummary";
 
 export class PlaybooksContainer extends Component {
   state = {
     isLoading: true
   };
+
   componentDidMount() {
     this.props
       .getPlaybooks()
       .catch(error => console.log(error))
       .then(() => this.setState({ isLoading: false }));
   }
+
   render() {
-    const { playbooks } = this.props;
+    const { playbooks, history } = this.props;
     const { isLoading } = this.state;
+
+    if (isLoading) {
+      return <LoadingContainer />;
+    }
+
     return (
-      <MainContainer>
-        {isLoading && (
-          <div className="pf-l-bullseye">
-            <div className="pf-l-bullseye__item">
-              <div className="pf-c-card">
-                <div className="pf-c-card__body">loading</div>
-              </div>
-            </div>
-          </div>
-        )}
+      <div>
         {!isLoading && isEmpty(playbooks) && (
           <div className="pf-l-bullseye">
             <div className="pf-l-bullseye__item">
@@ -60,9 +58,9 @@ export class PlaybooksContainer extends Component {
           </div>
         )}
         {playbooks.map(playbook => (
-          <Playbook key={playbook.id} playbook={playbook} />
+          <PlaybookSummary key={playbook.id} playbook={playbook} history={history} />
         ))}
-      </MainContainer>
+      </div>
     );
   }
 }

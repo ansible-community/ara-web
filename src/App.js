@@ -6,6 +6,7 @@ import "@patternfly/patternfly-next/patternfly.css";
 import store from "./store";
 import { getConfig } from "./config/configActions";
 import * as Containers from "./containers";
+import Header from "./layout/navigation/Header";
 
 class App extends Component {
   state = {
@@ -22,15 +23,29 @@ class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
-          <Switch>
-            <Redirect from="/" exact to="/playbooks" />
-            <Route
-              path="/playbooks"
-              exact
-              component={Containers.PlaybooksContainer}
-            />
-            <Route component={Containers.Container404} />
-          </Switch>
+        <div>
+          <div className="pf-c-background-image" />
+          <div className="pf-c-page" id="page-layout-horizontal-nav">
+            <Header />
+            <main role="main" className="pf-c-page__main">
+              <section className="pf-c-page__main-section">
+                <Switch>
+                  <Redirect from="/" exact to="/playbooks" />
+                  <Route
+                    path="/playbooks"
+                    exact
+                    component={Containers.PlaybooksContainer}
+                  />
+                  <Route
+                    path="/playbooks/:id"
+                    component={Containers.PlaybookContainer}
+                  />
+                  <Route component={Containers.Container404} />
+                </Switch>
+              </section>
+            </main>
+          </div>
+          </div>
         </BrowserRouter>
       </Provider>
     );

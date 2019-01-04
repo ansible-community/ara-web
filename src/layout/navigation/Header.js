@@ -15,7 +15,7 @@ export class NavLink extends Component {
       <Link
         to={to}
         className={`${className} ${
-          location.pathname === to ? "pf-m-current" : ""
+          location.pathname.indexOf(to) === -1 ? "" : "pf-m-current"
         }`}
         {...rest}
       >

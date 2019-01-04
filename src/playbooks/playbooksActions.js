@@ -13,3 +13,10 @@ export function getPlaybooks() {
     });
   };
 }
+
+export function getPlaybook(playbook) {
+  return (dispatch, getState) => {
+    const { apiURL } = getState().config;
+    return axios.get(`${apiURL}/api/v1/playbooks/${playbook.id}`);
+  };
+}
