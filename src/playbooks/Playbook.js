@@ -85,7 +85,7 @@ export default class Playbook extends Component {
             <StatusIcon status={playbook.status} />
           </div>
           <DataListCell className="pf-c-data-list__cell pf-m-flex-5">
-            {playbook.file.path.split("/").slice(-1)[0]}
+            {playbook.path.split("/").slice(-1)[0]}
           </DataListCell>
           <DataListCell
             className="pf-c-data-list__cell pf-m-flex-1"
