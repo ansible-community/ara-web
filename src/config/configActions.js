@@ -10,7 +10,7 @@ export function setConfig(config) {
 
 export function getConfig() {
   return dispatch => {
-    return axios.get("/config.json").then(response => {
+    return axios.get("config.json").then(response => {
       const config = response.data;
       dispatch(setConfig(config));
       return response;
