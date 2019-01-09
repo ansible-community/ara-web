@@ -1,5 +1,18 @@
+
 - job:
-    name: ara-build-dashboard
+    name: ara-web-unit-tests
+    parent: nodejs-npm
+    description: Run unit tests
+    files:
+      - src/.*
+      - .zuul.yaml
+      - zuul-playbooks/.*
+    vars:
+      node_version: 8
+    run: zuul-playbooks/test.yaml
+
+- job:
+    name: ara-web-build-dashboard
     # https://zuul.openstack.org/job/build-javascript-content
     parent: build-javascript-content
     description: |
@@ -20,10 +33,12 @@
     pre-run: zuul-playbooks/pre.yaml
     run: zuul-playbooks/build-dashboard.yaml
 
+
 - project:
     check:
       jobs:
-        - ara-build-dashboard
+        - ara-web-unit-tests
+        - ara-web-build-dashboard
     gate:
       jobs:
-        - ara-build-dashboard
+        - ara-web-unit-tests

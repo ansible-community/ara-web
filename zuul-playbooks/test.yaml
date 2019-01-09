@@ -1,0 +1,7 @@
+- name: Test ARA web
+  hosts: all
+  roles:
+    - role: npm
+      npm_command: build
+    - role: npm
+      npm_command: test
