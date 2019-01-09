@@ -2,7 +2,7 @@
   "name": "ara-web",
   "version": "1.0.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "http://localhost:3000/",
   "dependencies": {
     "@patternfly/patternfly-next": "1.0.105",
     "axios": "^0.18.0",

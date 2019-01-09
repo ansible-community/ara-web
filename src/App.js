@@ -21,7 +21,7 @@ class App extends Component {
     if (isLoading) return null;
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Switch>
             <Redirect from="/" exact to="/playbooks" />
             <Route
