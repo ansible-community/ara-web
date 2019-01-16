@@ -122,6 +122,15 @@ export default class Playbook extends Component {
                 <span className="pf-u-mr-xl">
                   <b>{playbook.files.length}</b> Files
                 </span>
+                <span className="pf-u-mr-xl">
+                  <b>{Object.keys(playbook.tasks).length}</b> tasks
+                </span>
+                <span className="pf-u-mr-xl">
+                  <b>{Object.keys(playbook.plays).length}</b> plays
+                </span>
+                <span className="pf-u-mr-xl">
+                  <b>{Object.keys(playbook.records).length}</b> records
+                </span>
               </PlaybookInfo>
               <Duration>
                 <i className="fa fa-clock" />
@@ -136,4 +145,3 @@ export default class Playbook extends Component {
     );
   }
 }
-
