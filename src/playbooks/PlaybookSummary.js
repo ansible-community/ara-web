@@ -79,30 +79,41 @@ const PlaybookWrapper = styled.div`
   }
 `;
 
-const StatusAndName = styled.div`
+const PlaybookContent = styled.div`
   display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 1em;
-  @media (min-width: 587px) {
-    width: 25%;
-    margin-bottom: 0;
+  flex-direction: column;
+  @media (min-width: 800px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 
-const PlaybookInfos = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+const StatusAndName = styled.div`
+  display: flex;
   align-items: center;
-  width: 100%;
-  @media (min-width: 587px) {
-    width: 50%;
+  min-width: 300px;
+`;
+
+const PlaybookInfos = styled.div`
+  margin: 2em 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  @media (min-width: 800px) {
+    flex-direction: row;
+    flex-grow: 1;
+    margin: 0;
+    align-items: center;
   }
 `;
 
 const PlaybookInfo = styled.div`
-  width: 140px;
-  @media (min-width: 587px) {
+  flex-grow: 1;
+  width: 100px;
+  max-width: 100px;
+
+  @media (min-width: 800px) {
     text-align: center;
   }
 `;
@@ -110,10 +121,9 @@ const PlaybookInfo = styled.div`
 const Duration = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
-  margin-top: 1em;
-  @media (min-width: 587px) {
-    width: 25%;
+  min-width: 100px;
+
+  @media (min-width: 800px) {
     justify-content: flex-end;
     margin-top: 0;
   }
@@ -130,40 +140,37 @@ export default class Playbook extends Component {
       >
         <div className="pf-c-card">
           <div className="pf-c-card__body">
-            <div className="pf-u-display-flex pf-u-flex-direction-column pf-u-flex-direction-row-on-md">
+            <PlaybookContent>
               <StatusAndName>
                 <StatusIcon status={playbook.status} />
-                <h1 className="pf-c-title pf-m-xl pf-u-ml-lg">
+                <h1 className="pf-c-title pf-m-xl pf-u-ml-md">
                   {playbook.path.split("/").slice(-1)[0]}
                 </h1>
               </StatusAndName>
               <PlaybookInfos>
-                <PlaybookInfo className="pf-u-mr-xl">
-                  <b>{Object.keys(playbook.arguments).length}</b> arguments
-                </PlaybookInfo>
-                <PlaybookInfo className="pf-u-mr-xl">
+                <PlaybookInfo>
                   <b>{playbook.hosts.length}</b> Hosts
                 </PlaybookInfo>
-                <PlaybookInfo className="pf-u-mr-xl">
+                <PlaybookInfo>
                   <b>{playbook.files.length}</b> Files
                 </PlaybookInfo>
-                <PlaybookInfo className="pf-u-mr-xl">
+                <PlaybookInfo>
                   <b>{Object.keys(playbook.tasks).length}</b> tasks
                 </PlaybookInfo>
-                <PlaybookInfo className="pf-u-mr-xl">
+                <PlaybookInfo>
                   <b>{Object.keys(playbook.plays).length}</b> plays
                 </PlaybookInfo>
-                <PlaybookInfo className="pf-u-mr-xl">
+                <PlaybookInfo>
                   <b>{Object.keys(playbook.records).length}</b> records
                 </PlaybookInfo>
               </PlaybookInfos>
               <Duration>
                 <i className="fa fa-clock" />
-                <span className="pf-u-ml-xs">
+                <span className="pf-u-ml-sm">
                   {Math.round(playbook.duration)} sec
                 </span>
               </Duration>
-            </div>
+            </PlaybookContent>
           </div>
         </div>
       </PlaybookWrapper>
