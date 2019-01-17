@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import "@patternfly/patternfly-next/patternfly.css";
+import "@patternfly/patternfly-next/patternfly-addons.css";
 import store from "./store";
 import { getConfig } from "./config/configActions";
 import * as Containers from "./containers";

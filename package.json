@@ -4,7 +4,9 @@
   "private": true,
   "homepage": "http://localhost:3000/",
   "dependencies": {
-    "@patternfly/patternfly-next": "1.0.110",
+    "@patternfly/patternfly-next": "1.0.128",
+    "@patternfly/react-icons": "2.9.7",
+    "@patternfly/react-tokens": "1.9.6",
     "axios": "^0.18.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",

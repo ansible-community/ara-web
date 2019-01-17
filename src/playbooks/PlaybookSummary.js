@@ -1,50 +1,73 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  PauseCircleIcon
+} from "@patternfly/react-icons";
+import {
+  global_danger_color_100,
+  global_success_color_100,
+  global_active_color_100,
+  global_warning_color_100,
+  global_Color_light_100
+} from "@patternfly/react-tokens";
 
-function _getIconInfo(status) {
+const StatusIcon = ({ status }) => {
   switch (status) {
     case "running":
-      return {
-        title: "Playbook is in progress.",
-        icon: "fa-pause",
-        color: "blue"
-      };
+      return (
+        <PauseCircleIcon
+          title="Playbook is in progress."
+          size="md"
+          style={{ color: global_active_color_100.value }}
+        />
+      );
     case "completed":
-      return {
-        title: "Playbook has completed successfully.",
-        icon: "fa-check",
-        color: "green"
-      };
+      return (
+        <CheckCircleIcon
+          title="Playbook has completed successfully."
+          size="md"
+          style={{ color: global_success_color_100.value }}
+        />
+      );
     case "failed":
-      return {
-        title: "Playbook has failed with one or more errors.",
-        icon: "fa-warning",
-        color: "red"
-      };
+      return (
+        <ExclamationCircleIcon
+          title="Playbook has failed with one or more errors."
+          size="md"
+          style={{ color: global_danger_color_100.value }}
+        />
+      );
     default:
-      return {
-        title: "Playbook's status is unknown.",
-        icon: "fa-warning",
-        color: "red"
-      };
+      return (
+        <ExclamationCircleIcon
+          title="Playbook's status is unknown."
+          size="md"
+          style={{ color: global_warning_color_100.value }}
+        />
+      );
   }
-}
+};
 
-const IconWrapper = styled.i`
-  color: ${props => props.color};
-`;
-
-class StatusIcon extends Component {
-  render() {
-    const { status } = this.props;
-    const iconInfo = _getIconInfo(status);
-    return (
-      <IconWrapper
-        color={iconInfo.color}
-        className={`fa ${iconInfo.icon}`}
-        title={iconInfo.title}
-      />
-    );
+function getBackground(status, backgroundColor = global_Color_light_100.value) {
+  switch (status) {
+    case "running":
+      return `linear-gradient(to right,${global_active_color_100.value} 0,${
+        global_active_color_100.value
+      } 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
+    case "completed":
+      return `linear-gradient(to right,${global_success_color_100.value} 0,${
+        global_success_color_100.value
+      } 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
+    case "failed":
+      return `linear-gradient(to right,${global_danger_color_100.value} 0,${
+        global_danger_color_100.value
+      } 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
+    default:
+      return `linear-gradient(to right,${global_warning_color_100.value} 0,${
+        global_warning_color_100.value
+      } 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
   }
 }
 
@@ -52,16 +75,7 @@ const PlaybookWrapper = styled.div`
   cursor: pointer;
   &:hover {
     .pf-c-card {
-      background: rgba(0, 0, 0, 0)
-        linear-gradient(
-          to right,
-          rgb(57, 165, 220) 0px,
-          rgb(57, 165, 220) 5px,
-          rgb(255, 255, 255) 5px,
-          rgb(255, 255, 255) 100%
-        )
-        no-repeat scroll 0% 0%;
-    }
+      background: ${props => getBackground(props.status)};
   }
 `;
 
@@ -75,23 +89,33 @@ const StatusAndName = styled.div`
     margin-bottom: 0;
   }
 `;
-const PlaybookInfo = styled.div`
-  display: flex;
+
+const PlaybookInfos = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   align-items: center;
   width: 100%;
-  margin-bottom: 1em;
   @media (min-width: 587px) {
     width: 50%;
-    margin-bottom: 0;
   }
 `;
+
+const PlaybookInfo = styled.div`
+  width: 140px;
+  @media (min-width: 587px) {
+    text-align: center;
+  }
+`;
+
 const Duration = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  margin-top: 1em;
   @media (min-width: 587px) {
     width: 25%;
     justify-content: flex-end;
+    margin-top: 0;
   }
 `;
 
@@ -100,6 +124,7 @@ export default class Playbook extends Component {
     const { playbook, history } = this.props;
     return (
       <PlaybookWrapper
+        status={playbook.status}
         className="pf-u-mb-xs"
         onClick={() => history.push(`/playbooks/${playbook.id}`)}
       >
@@ -112,26 +137,26 @@ export default class Playbook extends Component {
                   {playbook.path.split("/").slice(-1)[0]}
                 </h1>
               </StatusAndName>
-              <PlaybookInfo>
-                <span className="pf-u-mr-xl">
+              <PlaybookInfos>
+                <PlaybookInfo className="pf-u-mr-xl">
                   <b>{Object.keys(playbook.arguments).length}</b> arguments
-                </span>
-                <span className="pf-u-mr-xl">
+                </PlaybookInfo>
+                <PlaybookInfo className="pf-u-mr-xl">
                   <b>{playbook.hosts.length}</b> Hosts
-                </span>
-                <span className="pf-u-mr-xl">
+                </PlaybookInfo>
+                <PlaybookInfo className="pf-u-mr-xl">
                   <b>{playbook.files.length}</b> Files
-                </span>
-                <span className="pf-u-mr-xl">
+                </PlaybookInfo>
+                <PlaybookInfo className="pf-u-mr-xl">
                   <b>{Object.keys(playbook.tasks).length}</b> tasks
-                </span>
-                <span className="pf-u-mr-xl">
+                </PlaybookInfo>
+                <PlaybookInfo className="pf-u-mr-xl">
                   <b>{Object.keys(playbook.plays).length}</b> plays
-                </span>
-                <span className="pf-u-mr-xl">
+                </PlaybookInfo>
+                <PlaybookInfo className="pf-u-mr-xl">
                   <b>{Object.keys(playbook.records).length}</b> records
-                </span>
-              </PlaybookInfo>
+                </PlaybookInfo>
+              </PlaybookInfos>
               <Duration>
                 <i className="fa fa-clock" />
                 <span className="pf-u-ml-xs">
