@@ -1,10 +1,12 @@
-
 - job:
     name: ara-web-unit-tests
     parent: nodejs-npm
     description: Run unit tests
     files:
       - src/.*
+      - public/.*
+      - package.json
+      - package-lock.json
       - .zuul.yaml
       - zuul-playbooks/.*
     vars:
@@ -22,8 +24,10 @@
       be uploaded and configures the API server to api.demo.recordsansible.org.
     success-url: 'npm/html/'
     files:
-      - public/.*
       - src/.*
+      - public/.*
+      - package.json
+      - package-lock.json
       - .zuul.yaml
       - zuul-playbooks/.*
     vars:
@@ -32,7 +36,6 @@
       javascript_content_dir: build
     pre-run: zuul-playbooks/pre.yaml
     run: zuul-playbooks/build-dashboard.yaml
-
 
 - project:
     check:
