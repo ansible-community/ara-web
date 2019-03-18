@@ -7,6 +7,7 @@
     "@patternfly/patternfly-next": "^1.0.175",
     "@patternfly/react-icons": "^3.5.0",
     "@patternfly/react-tokens": "^2.0.4",
+    "@patternfly/react-core": "^2.3.6",
     "axios": "^0.18.0",
     "braces": "^2.3.2",
     "react": "^16.8.4",

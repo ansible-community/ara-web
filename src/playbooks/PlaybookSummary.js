@@ -149,19 +149,22 @@ export default class Playbook extends Component {
               </StatusAndName>
               <PlaybookInfos>
                 <PlaybookInfo>
-                  <b>{playbook.hosts.length}</b> Hosts
+                  <b>{playbook.items.plays}</b> Plays
                 </PlaybookInfo>
                 <PlaybookInfo>
-                  <b>{playbook.files.length}</b> Files
+                  <b>{playbook.items.tasks}</b> Tasks
                 </PlaybookInfo>
                 <PlaybookInfo>
-                  <b>{Object.keys(playbook.tasks).length}</b> tasks
+                  <b>{playbook.items.results}</b> Results
                 </PlaybookInfo>
                 <PlaybookInfo>
-                  <b>{Object.keys(playbook.plays).length}</b> plays
+                  <b>{playbook.items.hosts}</b> Hosts
                 </PlaybookInfo>
                 <PlaybookInfo>
-                  <b>{Object.keys(playbook.records).length}</b> records
+                  <b>{playbook.items.files}</b> Files
+                </PlaybookInfo>
+                <PlaybookInfo>
+                  <b>{playbook.items.records}</b> Records
                 </PlaybookInfo>
               </PlaybookInfos>
               <Duration>
