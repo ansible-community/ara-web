@@ -37,6 +37,18 @@
     pre-run: zuul-playbooks/pre.yaml
     run: zuul-playbooks/build-dashboard.yaml
 
+- job:
+    name: ara-web-upload-git-mirror
+    parent: upload-git-mirror
+    description: Mirrors openstack/ara-web to recordsansible/ara-web
+    allowed-projects: openstack/ara-web
+    vars:
+      git_mirror_repository: recordsansible/ara-web
+    secrets:
+      - name: git_mirror_credentials
+        secret: ara_git_mirror_credentials
+        pass-to-parent: true
+
 - project:
     check:
       jobs:
@@ -45,3 +57,6 @@
     gate:
       jobs:
         - ara-web-unit-tests
+    post:
+      jobs:
+        - ara-web-upload-git-mirror
