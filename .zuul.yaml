@@ -19,7 +19,7 @@
     parent: build-javascript-content
     description: |
       Uses a Ubuntu Xenial VM with Node 8 to run "npm run build" and make the
-      results available for browsing during code review on review.openstack.org.
+      results available for browsing during code review on review.opendev.org.
       It sets the homepage parameter from package.json to the URL where logs will
       be uploaded and configures the API server to api.demo.recordsansible.org.
     success-url: 'npm/html/'
@@ -40,8 +40,8 @@
 - job:
     name: ara-web-upload-git-mirror
     parent: upload-git-mirror
-    description: Mirrors openstack/ara-web to ansible-community/ara-web
-    allowed-projects: openstack/ara-web
+    description: Mirrors recordsansible/ara-web to ansible-community/ara-web
+    allowed-projects: recordsansible/ara-web
     vars:
       git_mirror_repository: ansible-community/ara-web
     secrets:
