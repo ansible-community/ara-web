@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Card, CardBody } from "@patternfly/react-core";
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
@@ -138,8 +139,8 @@ export default class Playbook extends Component {
         className="pf-u-mb-xs"
         onClick={() => history.push(`/playbooks/${playbook.id}`)}
       >
-        <div className="pf-c-card">
-          <div className="pf-c-card__body">
+        <Card>
+          <CardBody>
             <PlaybookContent>
               <StatusAndName>
                 <StatusIcon status={playbook.status} />
@@ -174,8 +175,8 @@ export default class Playbook extends Component {
                 </span>
               </Duration>
             </PlaybookContent>
-          </div>
-        </div>
+          </CardBody>
+        </Card>
       </PlaybookWrapper>
     );
   }

@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
-
+import {
+  Bullseye,
+  Button,
+  Card,
+  CardBody,
+  EmptyState,
+  EmptyStateVariant,
+  EmptyStateIcon,
+  EmptyStateBody,
+  PageSection,
+  PageSectionVariants,
+  Title
+} from "@patternfly/react-core";
+import { CubesIcon } from "@patternfly/react-icons";
 import { LoadingContainer } from "../containers";
 import { getPlaybooks } from "./playbooksActions";
 import PlaybookSummary from "./PlaybookSummary";
@@ -27,40 +40,41 @@ export class PlaybooksContainer extends Component {
     }
 
     return (
-      <div>
+      <PageSection variant={PageSectionVariants.default}>
         {!isLoading && isEmpty(playbooks) && (
-          <div className="pf-l-bullseye">
-            <div className="pf-l-bullseye__item">
-              <div className="pf-c-card">
-                <div className="pf-c-card__body">
-                  <div className="pf-c-empty-state">
-                    <i
-                      className="fas fa-cubes pf-c-empty-state__icon"
-                      aria-hidden="true"
-                    />
-                    <h1 className="pf-c-title pf-m-lg">No playbooks</h1>
-                    <p className="pf-c-empty-state__body">
-                      There is no playbook available on this instance of Ara
-                    </p>
-                    <div className="pf-c-empty-state__action">
-                      <a
-                        href="https://ara.readthedocs.io/en/latest/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        See documentation
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Bullseye>
+            <Card>
+              <CardBody>
+                <EmptyState variant={EmptyStateVariant.large}>
+                  <EmptyStateIcon icon={CubesIcon} />
+                  <Title headingLevel="h5" size="lg">
+                    No playbooks
+                  </Title>
+                  <EmptyStateBody>
+                    There is no playbook available on this instance of Ara
+                  </EmptyStateBody>
+                  <Button
+                    variant="primary"
+                    component="a"
+                    href="https://ara.readthedocs.io/en/latest/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    See documentation
+                  </Button>
+                </EmptyState>
+              </CardBody>
+            </Card>
+          </Bullseye>
         )}
         {playbooks.map(playbook => (
-          <PlaybookSummary key={playbook.id} playbook={playbook} history={history} />
+          <PlaybookSummary
+            key={playbook.id}
+            playbook={playbook}
+            history={history}
+          />
         ))}
-      </div>
+      </PageSection>
     );
   }
 }

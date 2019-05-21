@@ -1,17 +1,25 @@
 import React, { Component } from "react";
+import {
+  Bullseye,
+  Button,
+  PageSection,
+  PageSectionVariants
+} from "@patternfly/react-core";
 
 export default class Container404 extends Component {
   render() {
     return (
-      <div className="pf-l-bullseye">
-        <div className="pf-l-bullseye__item">
-          <div className="pf-c-card">
-            <div className="pf-c-card__body">
-              <p>We are looking for your page...but we can't find it</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageSection variant={PageSectionVariants.light}>
+        <Bullseye>
+          <p className="pf-u-text-align-center">
+            We are looking for your page...but we can't find it
+            <br />
+            <Button variant="secondary" component="a" href="/" className="pf-u-mt-xl">
+              Go to index
+            </Button>
+          </p>
+        </Bullseye>
+      </PageSection>
     );
   }
 }
