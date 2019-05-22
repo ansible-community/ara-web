@@ -3,8 +3,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  List,
-  ListItem,
   PageSection,
   PageSectionVariants
 } from "@patternfly/react-core";
@@ -12,6 +10,8 @@ import { connect } from "react-redux";
 import { isEmpty } from "lodash";
 import { LoadingContainer, Container404 } from "../containers";
 import { getPlaybook } from "./playbooksActions";
+import Tasks from "../tasks/Tasks";
+import { extractTasksFromPlays } from "../tasks/task";
 
 export class PlaybookContainer extends Component {
   state = {
@@ -40,7 +40,7 @@ export class PlaybookContainer extends Component {
         <Card>
           <CardHeader>Hosts</CardHeader>
           <CardBody>
-            <table class="pf-c-table pf-m-compact pf-m-grid-md" role="grid">
+            <table className="pf-c-table pf-m-compact pf-m-grid-md" role="grid">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -68,40 +68,7 @@ export class PlaybookContainer extends Component {
         </Card>
         <Card>
           <CardHeader>Plays</CardHeader>
-          {playbook.plays.map(play => (
-            <CardBody>
-              <h2>{play.name}</h2>
-              <List>
-                <ListItem>Started: {play.started}</ListItem>
-                <ListItem>Ended: {play.ended}</ListItem>
-                <ListItem>Duration: {play.duration}</ListItem>
-              </List>
-              <table class="pf-c-table pf-m-compact pf-m-grid-md" role="grid">
-                <thead>
-                  <tr>
-                    <th>Task</th>
-                    <th>Host</th>
-                    <th>Action</th>
-                    <th>Duration</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {play.tasks.map(task =>
-                    task.results.map(result => (
-                      <tr key={result.id}>
-                        <th data-label="Task">{task.name}</th>
-                        <th data-label="Host">{result.host.name}</th>
-                        <th data-label="Action">{task.action}</th>
-                        <th data-label="Duration">{result.duration}</th>
-                        <th data-label="Status">{result.status}</th>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </CardBody>
-          ))}
+          <Tasks tasks={extractTasksFromPlays(playbook.plays)} />
         </Card>
       </PageSection>
     );
