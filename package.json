@@ -9,7 +9,6 @@
     "@patternfly/react-icons": "^3.9.2",
     "@patternfly/react-tokens": "^2.5.1",
     "axios": "^0.18.0",
-    "braces": "^3.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.1",
