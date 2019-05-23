@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { isEmpty } from "lodash";
 import { LoadingContainer, Container404 } from "../containers";
 import { getPlaybook } from "./playbooksActions";
+import PlaybookSummary from "./PlaybookSummary";
 import Tasks from "../tasks/Tasks";
 import { extractTasksFromPlays } from "../tasks/task";
 
@@ -29,6 +30,7 @@ export class PlaybookContainer extends Component {
 
   render() {
     const { isLoading, playbook } = this.state;
+    const { history } = this.props;
     if (isLoading) {
       return <LoadingContainer />;
     }
@@ -37,6 +39,7 @@ export class PlaybookContainer extends Component {
     }
     return (
       <PageSection variant={PageSectionVariants.light}>
+        <PlaybookSummary key={playbook.id} playbook={playbook} history={history}/>
         <Card>
           <CardHeader>Hosts</CardHeader>
           <CardBody>
