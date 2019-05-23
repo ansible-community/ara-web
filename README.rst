@@ -1,27 +1,25 @@
 ara-web
 =======
 
-ARA Records Ansible playbook runs and makes the recorded data available and
-intuitive for users and systems.
+ARA Records Ansible playbooks and makes them easier to understand and troubleshoot.
 
-``ara-web`` is a component of ARA which provides a stateless web interface that
-queries the ARA API for displaying results of Ansible playbook runs.
+``ara-web`` is a standalone and stateless web client interface to the API
+provided by `ARA <https://github.com/ansible-community/ara>`_.
+
+Documentation is available at `ara.readthedocs.io <https://ara.readthedocs.io/en/feature-1.0/>`_.
 
 Requirements
 ============
 
-- Latest LTS release of the `Node.js runtime`_
+- Latest LTS release of the `Node.js runtime <https://nodejs.org/en/download/>`_
 - An instance of the `ARA API server`_ installed and running
-
-.. _Node.js runtime: https://nodejs.org/en/download/
-.. _ARA API server: https://github.com/openstack/ara-server
 
 Running the web interface
 =========================
 
 ::
 
-    git clone https://github.com/openstack/ara-web
+    git clone https://github.com/ansible-community/ara-web
     cd ara-web
     npm install
     npm start
@@ -45,7 +43,7 @@ Copyright
 
 ::
 
-    Copyright (c) 2018 Red Hat, Inc.
+    Copyright (c) 2019 Red Hat, Inc.
 
     ARA is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
