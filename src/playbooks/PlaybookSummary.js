@@ -144,6 +144,7 @@ export default class Playbook extends Component {
             <PlaybookContent>
               <StatusAndName>
                 <StatusIcon status={playbook.status} />
+                {new Date(playbook.started).toUTCString()}
                 <h1 className="pf-c-title pf-m-xl pf-u-ml-md">
                   {(playbook.name ? playbook.name : playbook.path.split("/").slice(-1)[0])}
                 </h1>
