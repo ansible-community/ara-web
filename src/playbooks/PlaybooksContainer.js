@@ -51,12 +51,12 @@ export class PlaybooksContainer extends Component {
                     No playbooks
                   </Title>
                   <EmptyStateBody>
-                    There is no playbook available on this instance of Ara
+                    No playbooks have been found when querying the ARA API server.
                   </EmptyStateBody>
                   <Button
                     variant="primary"
                     component="a"
-                    href="https://ara.readthedocs.io/en/latest/"
+                    href="https://ara.readthedocs.io/en/feature-1.0/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
