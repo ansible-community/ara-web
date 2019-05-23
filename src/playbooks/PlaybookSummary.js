@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Card, CardBody } from "@patternfly/react-core";
+import { Card, CardBody, Label } from "@patternfly/react-core";
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
@@ -119,6 +119,17 @@ const PlaybookInfo = styled.div`
   }
 `;
 
+const Labels = styled.div`
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+
+  @media (min-width: 800px) {
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+`;
+
 const Duration = styled.div`
   display: flex;
   align-items: center;
@@ -169,6 +180,11 @@ export default class Playbook extends Component {
                   <b>{playbook.items.records}</b> Records
                 </PlaybookInfo>
               </PlaybookInfos>
+              <Labels>
+                {playbook.labels.map(label => (
+                  <Label className="pf-u-mr-md" isCompact>{label.name}</Label>
+                ))}
+              </Labels>
               <Duration>
                 <i className="fa fa-clock" />
                 <span className="pf-u-ml-sm">
