@@ -145,7 +145,7 @@ export default class Playbook extends Component {
               <StatusAndName>
                 <StatusIcon status={playbook.status} />
                 <h1 className="pf-c-title pf-m-xl pf-u-ml-md">
-                  {playbook.path.split("/").slice(-1)[0]}
+                  {(playbook.name ? playbook.name : playbook.path.split("/").slice(-1)[0])}
                 </h1>
               </StatusAndName>
               <PlaybookInfos>
