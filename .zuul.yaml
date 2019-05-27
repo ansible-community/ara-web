@@ -2,13 +2,6 @@
     name: ara-web-unit-tests
     parent: nodejs-npm
     description: Run unit tests
-    files:
-      - src/.*
-      - public/.*
-      - package.json
-      - package-lock.json
-      - .zuul.yaml
-      - zuul-playbooks/.*
     vars:
       node_version: 10
     run: zuul-playbooks/test.yaml
