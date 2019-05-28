@@ -40,7 +40,7 @@ Contributors
 
 See contributors on GitHub_.
 
-.. _GitHub: https://github.com/openstack/ara-web/graphs/contributors
+.. _GitHub: https://github.com/ansible-community/ara-web/graphs/contributors
 
 Copyright
 =========
