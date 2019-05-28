@@ -4,7 +4,7 @@ ara-web
 ARA Records Ansible playbooks and makes them easier to understand and troubleshoot.
 
 ``ara-web`` is a standalone and stateless web client interface to the API
-provided by `ARA <https://github.com/ansible-community/ara>`_.
+provided by ARA_.
 
 Documentation is available at `ara.readthedocs.io <https://ara.readthedocs.io/en/feature-1.0/>`_.
 
@@ -12,7 +12,11 @@ Requirements
 ============
 
 - Latest LTS release of the `Node.js runtime <https://nodejs.org/en/download/>`_
-- An instance of the `ARA API server`_ installed and running
+- An instance of the ARA_ API server installed and running
+- The `public/config.json`_ file configured to use your API server
+
+.. _ARA: https://github.com/ansible-community/ara
+.. _public/config.json: https://github.com/ansible-community/ara-web/blob/master/public/config.json
 
 Running the web interface
 =========================
