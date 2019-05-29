@@ -6,8 +6,10 @@ import "@patternfly/patternfly/patternfly.css";
 import "@patternfly/patternfly/patternfly-addons.css";
 import store from "./store";
 import { getConfig } from "./config/configActions";
+import { checkAuthentification } from "./auth/authActions";
 import * as Containers from "./containers";
-import Header from "./layout/navigation/Header";
+import Header from "./layout/Header";
+import PrivateRoute from "./auth/PrivateRoute";
 import Page from "./layout/Page";
 
 class App extends Component {
@@ -16,7 +18,11 @@ class App extends Component {
   };
 
   componentDidMount() {
-    store.dispatch(getConfig()).then(() => this.setState({ isLoading: false }));
+    store
+      .dispatch(getConfig())
+      .then(() => store.dispatch(checkAuthentification()))
+      .catch(error => console.error(error))
+      .then(() => this.setState({ isLoading: false }));
   }
 
   render() {
@@ -28,15 +34,16 @@ class App extends Component {
           <Page header={<Header />}>
             <Switch>
               <Redirect from="/" exact to="/playbooks" />
-              <Route
+              <PrivateRoute
                 path="/playbooks"
                 exact
                 component={Containers.PlaybooksContainer}
               />
-              <Route
+              <PrivateRoute
                 path="/playbooks/:id"
                 component={Containers.PlaybookContainer}
               />
+              <Route path="/login" component={Containers.LoginContainer} />
               <Route component={Containers.Container404} />
             </Switch>
           </Page>

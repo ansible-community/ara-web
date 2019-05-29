@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { withRouter } from "react-router";
 import {
@@ -9,7 +10,7 @@ import {
   NavVariants,
   PageHeader
 } from "@patternfly/react-core";
-import logo from "./logo.svg";
+import logo from "../images/logo.svg";
 
 const Logo = styled(Brand)`
   height: 45px;
@@ -17,7 +18,8 @@ const Logo = styled(Brand)`
 
 class Header extends Component {
   render() {
-    const { location, history } = this.props;
+    const { location, history, isAuthenticated } = this.props;
+    if (!isAuthenticated) return null;
     const TopNav = (
       <Nav onSelect={this.onNavSelect} aria-label="Nav">
         <NavList variant={NavVariants.horizontal}>
@@ -49,4 +51,10 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(withRouter(Header));

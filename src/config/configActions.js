@@ -1,4 +1,4 @@
-import axios from "axios";
+import http from "../http";
 import * as types from "./configActionsTypes";
 
 export function setConfig(config) {
@@ -10,7 +10,7 @@ export function setConfig(config) {
 
 export function getConfig() {
   return dispatch => {
-    return axios.get(`${process.env.PUBLIC_URL}/config.json`).then(response => {
+    return http.get(`${process.env.PUBLIC_URL}/config.json`).then(response => {
       const config = response.data;
       dispatch(setConfig(config));
       return response;
