@@ -31,7 +31,7 @@ export class PlaybooksContainer extends Component {
     getPlaybooks()
       .catch(error => {
         let errorMessage = "";
-        if (error.status) {
+        if (error.response) {
           errorMessage = error.message;
         } else {
           errorMessage = `Server located at ${
@@ -83,7 +83,8 @@ export class PlaybooksContainer extends Component {
                     No playbooks
                   </Title>
                   <EmptyStateBody>
-                    No playbooks have been found when querying the ARA API server.
+                    No playbooks have been found when querying the ARA API
+                    server.
                   </EmptyStateBody>
                   <Button
                     variant="primary"
