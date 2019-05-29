@@ -14,34 +14,66 @@ import {
   PageSectionVariants,
   Title
 } from "@patternfly/react-core";
-import { CubesIcon } from "@patternfly/react-icons";
+import { CubesIcon, ErrorCircleOIcon } from "@patternfly/react-icons";
 import { LoadingContainer } from "../containers";
 import { getPlaybooks } from "./playbooksActions";
 import PlaybookSummary from "./PlaybookSummary";
 
 export class PlaybooksContainer extends Component {
   state = {
-    isLoading: true
+    isLoading: true,
+    hasError: false,
+    errorMessage: ""
   };
 
   componentDidMount() {
-    this.props
-      .getPlaybooks()
-      .catch(error => console.log(error))
+    const { getPlaybooks, config } = this.props;
+    getPlaybooks()
+      .catch(error => {
+        let errorMessage = "";
+        if (error.status) {
+          errorMessage = error.message;
+        } else {
+          errorMessage = `Server located at ${
+            config.apiURL
+          } is unreachable. Check your configuration. Verify that cross-origin requests are not blocked.`;
+        }
+        this.setState({ errorMessage, hasError: true });
+      })
       .then(() => this.setState({ isLoading: false }));
   }
 
   render() {
     const { playbooks, history } = this.props;
-    const { isLoading } = this.state;
+    const { isLoading, hasError, errorMessage } = this.state;
 
     if (isLoading) {
       return <LoadingContainer />;
     }
 
-    return (
-      <PageSection variant={PageSectionVariants.default}>
-        {!isLoading && isEmpty(playbooks) && (
+    if (!isLoading && hasError) {
+      return (
+        <PageSection variant={PageSectionVariants.default}>
+          <Bullseye>
+            <Card>
+              <CardBody>
+                <EmptyState variant={EmptyStateVariant.large}>
+                  <EmptyStateIcon icon={ErrorCircleOIcon} />
+                  <Title headingLevel="h5" size="lg">
+                    Error
+                  </Title>
+                  <EmptyStateBody>{errorMessage}</EmptyStateBody>
+                </EmptyState>
+              </CardBody>
+            </Card>
+          </Bullseye>
+        </PageSection>
+      );
+    }
+
+    if (!isLoading && isEmpty(playbooks)) {
+      return (
+        <PageSection variant={PageSectionVariants.default}>
           <Bullseye>
             <Card>
               <CardBody>
@@ -66,7 +98,12 @@ export class PlaybooksContainer extends Component {
               </CardBody>
             </Card>
           </Bullseye>
-        )}
+        </PageSection>
+      );
+    }
+
+    return (
+      <PageSection variant={PageSectionVariants.default}>
         {playbooks.map(playbook => (
           <PlaybookSummary
             key={playbook.id}
@@ -81,6 +118,7 @@ export class PlaybooksContainer extends Component {
 
 function mapStateToProps(state) {
   return {
+    config: state.config,
     playbooks: Object.values(state.playbooks)
   };
 }
