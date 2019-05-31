@@ -13,16 +13,31 @@ import PrivateRoute from "./auth/PrivateRoute";
 import Page from "./layout/Page";
 
 class App extends Component {
+  _isMounted = false;
+
   state = {
     isLoading: true
   };
 
   componentDidMount() {
+    this._isMounted = true;
     store
       .dispatch(getConfig())
       .then(() => store.dispatch(checkAuthentification()))
-      .catch(error => console.error(error))
-      .then(() => this.setState({ isLoading: false }));
+      .catch(error => {
+        if (this._isMounted) {
+          console.error(error);
+        }
+      })
+      .then(() => {
+        if (this._isMounted) {
+          this.setState({ isLoading: false });
+        }
+      });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
