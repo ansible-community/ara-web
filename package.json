@@ -23,10 +23,12 @@
     "build": "react-scripts build",
     "test": "CI=true react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --write \"src/**/*.js\""
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",
+    "prettier": "^1.17.1",
     "redux-mock-store": "^1.5.3"
   },
   "browserslist": [

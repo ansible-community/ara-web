@@ -7,7 +7,7 @@ import "@patternfly/patternfly/patternfly-addons.css";
 import store from "./store";
 import { getConfig } from "./config/configActions";
 import { checkAuthentification } from "./auth/authActions";
-import * as Containers from "./containers";
+import * as Pages from "./pages";
 import Header from "./layout/Header";
 import PrivateRoute from "./auth/PrivateRoute";
 import Page from "./layout/Page";
@@ -52,14 +52,14 @@ class App extends Component {
               <PrivateRoute
                 path="/playbooks"
                 exact
-                component={Containers.PlaybooksContainer}
+                component={Pages.PlaybooksPage}
               />
               <PrivateRoute
                 path="/playbooks/:id"
-                component={Containers.PlaybookContainer}
+                component={Pages.PlaybookPage}
               />
-              <Route path="/login" component={Containers.LoginContainer} />
-              <Route component={Containers.Container404} />
+              <Route path="/login" component={Pages.LoginPage} />
+              <Route component={Pages.Page404} />
             </Switch>
           </Page>
         </BrowserRouter>

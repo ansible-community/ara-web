@@ -6,7 +6,7 @@ import {
   PageSectionVariants
 } from "@patternfly/react-core";
 
-export default class Container404 extends Component {
+export default class Page404 extends Component {
   render() {
     return (
       <PageSection variant={PageSectionVariants.light}>
@@ -14,7 +14,12 @@ export default class Container404 extends Component {
           <p className="pf-u-text-align-center">
             We are looking for your page...but we can't find it
             <br />
-            <Button variant="secondary" component="a" href="/" className="pf-u-mt-xl">
+            <Button
+              variant="secondary"
+              component="a"
+              href="/"
+              className="pf-u-mt-xl"
+            >
               Go to index
             </Button>
           </p>

@@ -15,11 +15,11 @@ import {
   Title
 } from "@patternfly/react-core";
 import { CubesIcon, ErrorCircleOIcon } from "@patternfly/react-icons";
-import { LoadingContainer } from "../containers";
+import { LoadingPage } from "../pages";
 import { getPlaybooks } from "./playbooksActions";
 import PlaybookSummary from "./PlaybookSummary";
 
-export class PlaybooksContainer extends Component {
+export class PlaybooksPage extends Component {
   state = {
     isLoading: true,
     hasError: false,
@@ -48,7 +48,7 @@ export class PlaybooksContainer extends Component {
     const { isLoading, hasError, errorMessage } = this.state;
 
     if (isLoading) {
-      return <LoadingContainer />;
+      return <LoadingPage />;
     }
 
     if (!isLoading && hasError) {
@@ -133,4 +133,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PlaybooksContainer);
+)(PlaybooksPage);

@@ -7,7 +7,7 @@ import {
   PageSectionVariants
 } from "@patternfly/react-core";
 
-export default class LoadingContainer extends Component {
+export default class LoadingPage extends Component {
   state = {
     seconds: 0
   };

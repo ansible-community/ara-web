@@ -8,13 +8,13 @@ import {
 } from "@patternfly/react-core";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
-import { LoadingContainer, Container404 } from "../containers";
+import { LoadingPage, Page404 } from "../pages";
 import { getPlaybook } from "./playbooksActions";
 import PlaybookSummary from "./PlaybookSummary";
 import Tasks from "../tasks/Tasks";
 import { extractTasksFromPlays } from "../tasks/task";
 
-export class PlaybookContainer extends Component {
+export class PlaybookPage extends Component {
   state = {
     isLoading: true,
     playbook: null
@@ -32,14 +32,18 @@ export class PlaybookContainer extends Component {
     const { isLoading, playbook } = this.state;
     const { history } = this.props;
     if (isLoading) {
-      return <LoadingContainer />;
+      return <LoadingPage />;
     }
     if (!isLoading && isEmpty(playbook)) {
-      return <Container404 />;
+      return <Page404 />;
     }
     return (
       <PageSection variant={PageSectionVariants.light}>
-        <PlaybookSummary key={playbook.id} playbook={playbook} history={history}/>
+        <PlaybookSummary
+          key={playbook.id}
+          playbook={playbook}
+          history={history}
+        />
         <Card>
           <CardHeader>Hosts</CardHeader>
           <CardBody>
@@ -87,4 +91,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(PlaybookContainer);
+)(PlaybookPage);

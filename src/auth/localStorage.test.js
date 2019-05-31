@@ -1,7 +1,7 @@
 import {
   setCredentials,
   getCredentials,
-  removeCredentials,
+  removeCredentials
 } from "./localStorage";
 
 it("localStorage getCredentials", () => {

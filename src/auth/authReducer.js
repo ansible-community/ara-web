@@ -10,12 +10,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: true
-      }
+      };
     case types.LOGOUT:
-        return {
-          ...state,
-          isAuthenticated: false
-        }
+      return {
+        ...state,
+        isAuthenticated: false
+      };
     default:
       return state;
   }

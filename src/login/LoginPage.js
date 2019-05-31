@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 import logo from "../images/logo.svg";
 import { login } from "../auth/authActions";
 
-export class LoginContainer extends Component {
+export class AraLoginPage extends Component {
   state = {
     showHelperText: false,
     helperText: "",
@@ -113,4 +113,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginContainer);
+)(AraLoginPage);
