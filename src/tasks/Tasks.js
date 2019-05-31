@@ -6,7 +6,7 @@ export default class Tasks extends Component {
     const { tasks } = this.props;
     return (
       <table
-        className="pf-c-table pf-m-expandable"
+        className="pf-c-table pf-m-compact pf-m-expandable"
         role="grid"
         aria-label="Tasks table"
       >

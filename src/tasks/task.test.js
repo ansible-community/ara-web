@@ -100,7 +100,7 @@ test("extractTasksFromPlays", () => {
     {
       name: "Gathering Facts",
       action: "gather_facts",
-      average_duration: 1.702101,
+      average_duration: 1.7,
       statuses: {
         ok: 1,
         failed: 0,
@@ -125,7 +125,7 @@ test("extractTasksFromPlays", () => {
     {
       name: "Gathering Facts",
       action: "gather_facts",
-      average_duration: 1.296572,
+      average_duration: 1.3,
       statuses: {
         ok: 3,
         failed: 0,
@@ -161,7 +161,7 @@ test("extractTasksFromPlays", () => {
           ended: "2019-05-17T16:55:12.195753",
           status: "ok"
         }
-      ],
+      ]
     }
   ];
   expect(extractTasksFromPlays(plays)).toEqual(expectedTasks);

@@ -78,9 +78,9 @@ export default class TaskRow extends Component {
           className={`pf-c-table__expandable-row ${isExpanded &&
             "pf-m-expanded"}`}
         >
-          <td colspan="5">
+          <td colspan="5" className="pf-u-p-0">
             <div
-              className={`pf-c-table__expandable-row-content pf-u-p-2xl ${isExpanded &&
+              className={`pf-c-table__expandable-row-content ${isExpanded &&
                 "pf-m-expanded"}`}
             >
               <table
@@ -90,16 +90,22 @@ export default class TaskRow extends Component {
                 <caption>Task results</caption>
                 <thead>
                   <tr>
+                    <th className="pf-u-text-align-center">Status</th>
                     <th className="pf-u-text-align-center">Host</th>
                     <th className="pf-u-text-align-center">Started</th>
                     <th className="pf-u-text-align-center">Ended</th>
                     <th className="pf-u-text-align-center">Duration</th>
-                    <th className="pf-u-text-align-center">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {task.results.map(result => (
                     <tr>
+                      <td
+                        data-label="Status"
+                        className="pf-u-text-align-center"
+                      >
+                        <Status status={result.status}>{result.status}</Status>
+                      </td>
                       <td data-label="Host" className="pf-u-text-align-center">
                         {result.host.name}
                       </td>
@@ -118,19 +124,12 @@ export default class TaskRow extends Component {
                       >
                         {result.duration}
                       </td>
-                      <td
-                        data-label="Status"
-                        className="pf-u-text-align-center"
-                      >
-                        <Status status={result.status}>{result.status}</Status>
-                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
           </td>
-          <td />
         </tr>
       </tbody>
     );

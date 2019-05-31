@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Card,
   CardHeader,
-  CardBody,
   PageSection,
   PageSectionVariants
 } from "@patternfly/react-core";
@@ -38,40 +37,38 @@ export class PlaybookPage extends Component {
       return <Page404 />;
     }
     return (
-      <PageSection variant={PageSectionVariants.light}>
+      <PageSection variant={PageSectionVariants.default}>
         <PlaybookSummary
           key={playbook.id}
           playbook={playbook}
           history={history}
         />
-        <Card>
+        <Card className="pf-u-mb-xs">
           <CardHeader>Hosts</CardHeader>
-          <CardBody>
-            <table className="pf-c-table pf-m-compact pf-m-grid-md" role="grid">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>OK</th>
-                  <th>CHANGED</th>
-                  <th>FAILED</th>
-                  <th>SKIPPED</th>
-                  <th>UNREACHABLE</th>
+          <table className="pf-c-table pf-m-compact pf-m-grid-md" role="grid">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>OK</th>
+                <th>CHANGED</th>
+                <th>FAILED</th>
+                <th>SKIPPED</th>
+                <th>UNREACHABLE</th>
+              </tr>
+            </thead>
+            <tbody>
+              {playbook.hosts.map(host => (
+                <tr key={host.id}>
+                  <td data-label="Name">{host.name}</td>
+                  <td data-label="OK">{host.ok}</td>
+                  <td data-label="CHANGED">{host.changed}</td>
+                  <td data-label="FAILED">{host.failed}</td>
+                  <td data-label="SKIPPED">{host.skipped}</td>
+                  <td data-label="UNREACHABLE">{host.unreachable}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {playbook.hosts.map(host => (
-                  <tr key={host.id}>
-                    <td data-label="Name">{host.name}</td>
-                    <td data-label="OK">{host.ok}</td>
-                    <td data-label="CHANGED">{host.changed}</td>
-                    <td data-label="FAILED">{host.failed}</td>
-                    <td data-label="SKIPPED">{host.skipped}</td>
-                    <td data-label="UNREACHABLE">{host.unreachable}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </CardBody>
+              ))}
+            </tbody>
+          </table>
         </Card>
         <Card>
           <CardHeader>Plays</CardHeader>

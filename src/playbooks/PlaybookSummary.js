@@ -4,7 +4,9 @@ import { Card, CardBody, Label } from "@patternfly/react-core";
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
-  PauseCircleIcon
+  PauseCircleIcon,
+  CalendarAltIcon,
+  ClockIcon
 } from "@patternfly/react-icons";
 import {
   global_danger_color_100,
@@ -155,9 +157,10 @@ export default class Playbook extends Component {
             <PlaybookContent>
               <StatusAndName>
                 <StatusIcon status={playbook.status} />
-                {new Date(playbook.started).toUTCString()}
                 <h1 className="pf-c-title pf-m-xl pf-u-ml-md">
-                  {(playbook.name ? playbook.name : playbook.path.split("/").slice(-1)[0])}
+                  {playbook.name
+                    ? playbook.name
+                    : playbook.path.split("/").slice(-1)[0]}
                 </h1>
               </StatusAndName>
               <PlaybookInfos>
@@ -182,11 +185,19 @@ export default class Playbook extends Component {
               </PlaybookInfos>
               <Labels>
                 {playbook.labels.map(label => (
-                  <Label className="pf-u-mr-md" isCompact>{label.name}</Label>
+                  <Label className="pf-u-mr-md" isCompact>
+                    {label.name}
+                  </Label>
                 ))}
               </Labels>
               <Duration>
-                <i className="fa fa-clock" />
+                <CalendarAltIcon />
+                <span className="pf-u-ml-sm">
+                  {new Date(playbook.started).toUTCString()}
+                </span>
+              </Duration>
+              <Duration>
+                <ClockIcon />
                 <span className="pf-u-ml-sm">
                   {Math.round(playbook.duration)} sec
                 </span>

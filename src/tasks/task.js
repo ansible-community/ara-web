@@ -4,7 +4,8 @@ function _getAveragesFromTask(task) {
     (acc, result) => {
       acc.statuses[result.status] += 1;
       acc.total_duration += parseFloat(result.duration);
-      acc.average_duration = acc.total_duration / results.length;
+      acc.average_duration =
+        Math.round((acc.total_duration * 100) / results.length) / 100;
       return acc;
     },
     {
