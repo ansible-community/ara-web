@@ -89,7 +89,7 @@ export class AraLoginPage extends Component {
             </LoginFooterItem>
           </ListItem>
         }
-        textContent="The ARA API server you are connecting to, requires authentication. Please specify your credentials to proceed."
+        textContent="The ARA API server you are connecting to requires authentication. Please specify your credentials to proceed."
         loginTitle="Log in to your account"
       >
         {loginForm}
