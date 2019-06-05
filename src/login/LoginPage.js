@@ -84,7 +84,7 @@ export class AraLoginPage extends Component {
         brandImgAlt="Ara"
         footerListItems={
           <ListItem>
-            <LoginFooterItem href="https://ara.readthedocs.io/en/feature-1.0/">
+            <LoginFooterItem href="https://ara.readthedocs.io/">
               Documentation
             </LoginFooterItem>
           </ListItem>

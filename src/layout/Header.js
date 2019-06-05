@@ -32,7 +32,7 @@ class Header extends Component {
             Playbooks
           </NavItem>
           <NavItem
-            to="https://ara.readthedocs.io/en/feature-1.0/"
+            to="https://ara.readthedocs.io/"
             target="_blank"
             rel="noopener noreferrer"
           >

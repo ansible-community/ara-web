@@ -89,7 +89,7 @@ export class PlaybooksPage extends Component {
                   <Button
                     variant="primary"
                     component="a"
-                    href="https://ara.readthedocs.io/en/feature-1.0/"
+                    href="https://ara.readthedocs.io/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

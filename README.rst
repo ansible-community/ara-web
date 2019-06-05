@@ -6,7 +6,7 @@ ARA Records Ansible playbooks and makes them easier to understand and troublesho
 ``ara-web`` is a standalone and stateless web client interface to the API
 provided by ARA_.
 
-Documentation is available at `ara.readthedocs.io <https://ara.readthedocs.io/en/feature-1.0/>`_.
+Documentation is available at `ara.readthedocs.io <https://ara.readthedocs.io/>`_.
 
 Requirements
 ============
