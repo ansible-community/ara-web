@@ -43,7 +43,7 @@ class Header extends Component {
     );
     return (
       <PageHeader
-        logo={<Logo src={logo} alt="Ara Logo" />}
+        logo={<Logo src={logo} alt="ARA Records Ansible" />}
         logoProps={{ href: "/" }}
         topNav={TopNav}
       />
