@@ -113,16 +113,16 @@ export default class TaskRow extends Component {
                         data-label="Started"
                         className="pf-u-text-align-center"
                       >
-                        {result.started}
+                        {new Date(result.started).toUTCString()}
                       </td>
                       <td data-label="Ended" className="pf-u-text-align-center">
-                        {result.ended}
+                        {new Date(result.ended).toUTCString()}
                       </td>
                       <td
                         data-label="Duration"
                         className="pf-u-text-align-center"
                       >
-                        {result.duration}
+                        {result.duration} sec
                       </td>
                     </tr>
                   ))}
