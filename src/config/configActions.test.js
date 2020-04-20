@@ -5,7 +5,7 @@ it("setConfig", () => {
   const config = { apiURL: "http://example.org" };
   const expectedActions = {
     type: types.SET_CONFIG,
-    config
+    config,
   };
   expect(actions.setConfig(config)).toEqual(expectedActions);
 });

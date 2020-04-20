@@ -8,14 +8,14 @@ class PrivateRoute extends Component {
     return (
       <Route
         {...props}
-        render={props =>
+        render={(props) =>
           isAuthenticated ? (
             <Component {...props} />
           ) : (
             <Redirect
               to={{
                 pathname: "/login",
-                state: { from: props.location }
+                state: { from: props.location },
               }}
             />
           )
@@ -27,7 +27,7 @@ class PrivateRoute extends Component {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
   };
 }
 

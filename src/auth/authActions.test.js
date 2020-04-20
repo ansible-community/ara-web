@@ -15,8 +15,8 @@ it("checkAuthentification", () => {
   axiosMock.onGet("https://api.example.org/api/v1/").reply(200, {});
   const expectedActions = [
     {
-      type: types.LOGIN
-    }
+      type: types.LOGIN,
+    },
   ];
   const store = mockStore({ config: { apiURL: "https://api.example.org" } });
   return store.dispatch(checkAuthentification()).then(() => {
@@ -28,8 +28,8 @@ it("checkAuthentification unauthorized", () => {
   axiosMock.onGet("https://api.example.org/api/v1/").reply(401, {});
   const expectedActions = [
     {
-      type: types.LOGOUT
-    }
+      type: types.LOGOUT,
+    },
   ];
   const store = mockStore({ config: { apiURL: "https://api.example.org" } });
   return store.dispatch(checkAuthentification()).catch(() => {

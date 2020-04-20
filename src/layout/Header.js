@@ -8,7 +8,7 @@ import {
   NavItem,
   NavList,
   NavVariants,
-  PageHeader
+  PageHeader,
 } from "@patternfly/react-core";
 import logo from "../images/logo.svg";
 
@@ -53,7 +53,7 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
   };
 }
 

@@ -6,14 +6,14 @@ import {
   ExclamationCircleIcon,
   PauseCircleIcon,
   CalendarAltIcon,
-  ClockIcon
+  ClockIcon,
 } from "@patternfly/react-icons";
 import {
   global_danger_color_100,
   global_success_color_100,
   global_active_color_100,
   global_warning_color_100,
-  global_Color_light_100
+  global_Color_light_100,
 } from "@patternfly/react-tokens";
 
 const StatusIcon = ({ status }) => {
@@ -56,21 +56,13 @@ const StatusIcon = ({ status }) => {
 function getBackground(status, backgroundColor = global_Color_light_100.value) {
   switch (status) {
     case "running":
-      return `linear-gradient(to right,${global_active_color_100.value} 0,${
-        global_active_color_100.value
-      } 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
+      return `linear-gradient(to right,${global_active_color_100.value} 0,${global_active_color_100.value} 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
     case "completed":
-      return `linear-gradient(to right,${global_success_color_100.value} 0,${
-        global_success_color_100.value
-      } 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
+      return `linear-gradient(to right,${global_success_color_100.value} 0,${global_success_color_100.value} 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
     case "failed":
-      return `linear-gradient(to right,${global_danger_color_100.value} 0,${
-        global_danger_color_100.value
-      } 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
+      return `linear-gradient(to right,${global_danger_color_100.value} 0,${global_danger_color_100.value} 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
     default:
-      return `linear-gradient(to right,${global_warning_color_100.value} 0,${
-        global_warning_color_100.value
-      } 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
+      return `linear-gradient(to right,${global_warning_color_100.value} 0,${global_warning_color_100.value} 5px,${backgroundColor} 5px,${backgroundColor} 100%) no-repeat`;
   }
 }
 
@@ -78,7 +70,7 @@ const PlaybookWrapper = styled.div`
   cursor: pointer;
   &:hover {
     .pf-c-card {
-      background: ${props => getBackground(props.status)};
+      background: ${(props) => getBackground(props.status)};
   }
 `;
 
@@ -184,7 +176,7 @@ export default class Playbook extends Component {
                 </PlaybookInfo>
               </PlaybookInfos>
               <Labels>
-                {playbook.labels.map(label => (
+                {playbook.labels.map((label) => (
                   <Label className="pf-u-mr-md" isCompact>
                     {label.name}
                   </Label>
@@ -198,9 +190,7 @@ export default class Playbook extends Component {
               </Duration>
               <Duration>
                 <ClockIcon />
-                <span className="pf-u-ml-sm">
-                  {playbook.duration}
-                </span>
+                <span className="pf-u-ml-sm">{playbook.duration}</span>
               </Duration>
             </PlaybookContent>
           </CardBody>

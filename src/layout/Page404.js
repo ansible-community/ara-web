@@ -3,7 +3,7 @@ import {
   Bullseye,
   Button,
   PageSection,
-  PageSectionVariants
+  PageSectionVariants,
 } from "@patternfly/react-core";
 
 export default class Page404 extends Component {

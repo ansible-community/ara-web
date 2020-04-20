@@ -12,7 +12,7 @@ import {
   EmptyStateBody,
   PageSection,
   PageSectionVariants,
-  Title
+  Title,
 } from "@patternfly/react-core";
 import { CubesIcon, ErrorCircleOIcon } from "@patternfly/react-icons";
 import { LoadingPage } from "../pages";
@@ -23,20 +23,18 @@ export class PlaybooksPage extends Component {
   state = {
     isLoading: true,
     hasError: false,
-    errorMessage: ""
+    errorMessage: "",
   };
 
   componentDidMount() {
     const { getPlaybooks, config } = this.props;
     getPlaybooks()
-      .catch(error => {
+      .catch((error) => {
         let errorMessage = "";
         if (error.response) {
           errorMessage = error.message;
         } else {
-          errorMessage = `Server located at ${
-            config.apiURL
-          } is unreachable. Check your configuration. Verify that cross-origin requests are not blocked.`;
+          errorMessage = `Server located at ${config.apiURL} is unreachable. Check your configuration. Verify that cross-origin requests are not blocked.`;
         }
         this.setState({ errorMessage, hasError: true });
       })
@@ -105,7 +103,7 @@ export class PlaybooksPage extends Component {
 
     return (
       <PageSection variant={PageSectionVariants.default}>
-        {playbooks.map(playbook => (
+        {playbooks.map((playbook) => (
           <PlaybookSummary
             key={playbook.id}
             playbook={playbook}
@@ -120,17 +118,14 @@ export class PlaybooksPage extends Component {
 function mapStateToProps(state) {
   return {
     config: state.config,
-    playbooks: Object.values(state.playbooks)
+    playbooks: Object.values(state.playbooks),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPlaybooks: () => dispatch(getPlaybooks())
+    getPlaybooks: () => dispatch(getPlaybooks()),
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PlaybooksPage);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaybooksPage);

@@ -18,8 +18,8 @@ function _getAveragesFromTask(task) {
         unreachable: 0,
         changed: 0,
         ignored: 0,
-        unknown: 0
-      }
+        unknown: 0,
+      },
     }
   );
 }
@@ -33,7 +33,7 @@ export function extractTasksFromPlays(plays) {
         results: task.results,
         task_id: task.id,
         statuses: taskAverages.statuses,
-        average_duration: taskAverages.average_duration
+        average_duration: taskAverages.average_duration,
       });
     }
     return acc;

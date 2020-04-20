@@ -8,7 +8,7 @@ const store = createStore(
   combineReducers({
     config: configReducer,
     playbooks: playbooksReducer,
-    auth: authReducer
+    auth: authReducer,
   }),
   applyMiddleware(thunk)
 );

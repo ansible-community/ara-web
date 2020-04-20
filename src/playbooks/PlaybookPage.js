@@ -3,7 +3,7 @@ import {
   Card,
   CardHeader,
   PageSection,
-  PageSectionVariants
+  PageSectionVariants,
 } from "@patternfly/react-core";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
@@ -16,14 +16,14 @@ import { extractTasksFromPlays } from "../tasks/task";
 export class PlaybookPage extends Component {
   state = {
     isLoading: true,
-    playbook: null
+    playbook: null,
   };
 
   componentDidMount() {
     this.props
       .getPlaybook({ id: this.props.match.params.id })
-      .then(response => this.setState({ playbook: response.data }))
-      .catch(error => console.log(error))
+      .then((response) => this.setState({ playbook: response.data }))
+      .catch((error) => console.log(error))
       .then(() => this.setState({ isLoading: false }));
   }
 
@@ -57,7 +57,7 @@ export class PlaybookPage extends Component {
               </tr>
             </thead>
             <tbody>
-              {playbook.hosts.map(host => (
+              {playbook.hosts.map((host) => (
                 <tr key={host.id}>
                   <td data-label="Name">{host.name}</td>
                   <td data-label="OK">{host.ok}</td>
@@ -81,11 +81,8 @@ export class PlaybookPage extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPlaybook: playbook => dispatch(getPlaybook(playbook))
+    getPlaybook: (playbook) => dispatch(getPlaybook(playbook)),
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(PlaybookPage);
+export default connect(null, mapDispatchToProps)(PlaybookPage);

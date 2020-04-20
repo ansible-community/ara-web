@@ -4,7 +4,7 @@ import {
   LoginFooterItem,
   LoginForm,
   LoginPage,
-  ListItem
+  ListItem,
 } from "@patternfly/react-core";
 import { Redirect } from "react-router-dom";
 import logo from "../images/logo.svg";
@@ -18,18 +18,18 @@ export class AraLoginPage extends Component {
     isValidUsername: true,
     password: "",
     isValidPassword: true,
-    redirectToReferrer: false
+    redirectToReferrer: false,
   };
 
-  handleUsernameChange = username => {
+  handleUsernameChange = (username) => {
     this.setState({ username });
   };
 
-  handlePasswordChange = password => {
+  handlePasswordChange = (password) => {
     this.setState({ password });
   };
 
-  onLoginButtonClick = event => {
+  onLoginButtonClick = (event) => {
     event.preventDefault();
     const { username, password } = this.state;
     const { login } = this.props;
@@ -42,7 +42,7 @@ export class AraLoginPage extends Component {
           showHelperText: true,
           isValidUsername: false,
           isValidPassword: false,
-          helperText: "Invalid username or password"
+          helperText: "Invalid username or password",
         });
       });
   };
@@ -55,7 +55,7 @@ export class AraLoginPage extends Component {
       isValidPassword,
       showHelperText,
       helperText,
-      redirectToReferrer
+      redirectToReferrer,
     } = this.state;
     const { location, isAuthenticated } = this.props;
     const { from } = location.state || { from: { pathname: "/" } };
@@ -100,17 +100,14 @@ export class AraLoginPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: (username, password) => dispatch(login(username, password))
+    login: (username, password) => dispatch(login(username, password)),
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AraLoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AraLoginPage);

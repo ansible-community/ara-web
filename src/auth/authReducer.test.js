@@ -7,18 +7,18 @@ it("returns the initial state", () => {
 
 it("LOGIN", () => {
   const newState = reducer(undefined, {
-    type: types.LOGIN
+    type: types.LOGIN,
   });
   expect(newState).toEqual({
-    isAuthenticated: true
+    isAuthenticated: true,
   });
 });
 
 it("LOGOUT", () => {
   const newState = reducer(undefined, {
-    type: types.LOGOUT
+    type: types.LOGOUT,
   });
   expect(newState).toEqual({
-    isAuthenticated: false
+    isAuthenticated: false,
   });
 });

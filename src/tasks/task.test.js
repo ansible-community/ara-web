@@ -17,13 +17,13 @@ test("extractTasksFromPlays", () => {
               host: { id: 3, name: "localhost", alias: "localhost" },
               started: "2019-05-17T16:55:07.993741",
               ended: "2019-05-17T16:55:09.695842",
-              status: "ok"
-            }
+              status: "ok",
+            },
           ],
           file: {
             id: 6,
             path:
-              "/home/zuul/src/opendev.org/recordsansible/ara/tests/integration/hosts.yaml"
+              "/home/zuul/src/opendev.org/recordsansible/ara/tests/integration/hosts.yaml",
           },
           started: "2019-05-17T16:55:07.993741",
           ended: "2019-05-17T16:55:09.787161",
@@ -32,13 +32,13 @@ test("extractTasksFromPlays", () => {
           lineno: 19,
           handler: false,
           status: "completed",
-          play: 4
-        }
+          play: 4,
+        },
       ],
       started: "2019-05-17T16:55:07.795907",
       ended: "2019-05-17T16:55:10.006643",
       name: "Create fake hosts for host tests",
-      status: "completed"
+      status: "completed",
     },
     {
       id: 5,
@@ -55,7 +55,7 @@ test("extractTasksFromPlays", () => {
               host: { id: 5, name: "host3", alias: null },
               started: "2019-05-17T16:55:10.330416",
               ended: "2019-05-17T16:55:11.263736",
-              status: "ok"
+              status: "ok",
             },
             {
               id: 7,
@@ -63,7 +63,7 @@ test("extractTasksFromPlays", () => {
               host: { id: 6, name: "host2", alias: null },
               started: "2019-05-17T16:55:10.330416",
               ended: "2019-05-17T16:55:11.421475",
-              status: "ok"
+              status: "ok",
             },
             {
               id: 8,
@@ -71,13 +71,13 @@ test("extractTasksFromPlays", () => {
               host: { id: 7, name: "host1", alias: null },
               started: "2019-05-17T16:55:10.330416",
               ended: "2019-05-17T16:55:12.195753",
-              status: "ok"
-            }
+              status: "ok",
+            },
           ],
           file: {
             id: 6,
             path:
-              "/home/zuul/src/opendev.org/recordsansible/ara/tests/integration/hosts.yaml"
+              "/home/zuul/src/opendev.org/recordsansible/ara/tests/integration/hosts.yaml",
           },
           started: "2019-05-17T16:55:10.330416",
           ended: "2019-05-17T16:55:12.289771",
@@ -86,14 +86,14 @@ test("extractTasksFromPlays", () => {
           lineno: 33,
           handler: false,
           status: "completed",
-          play: 5
-        }
+          play: 5,
+        },
       ],
       started: "2019-05-17T16:55:10.135506",
       ended: "2019-05-17T16:55:14.488333",
       name: "ARA Hosts test play",
-      status: "completed"
-    }
+      status: "completed",
+    },
   ];
 
   const expectedTasks = [
@@ -108,7 +108,7 @@ test("extractTasksFromPlays", () => {
         unreachable: 0,
         changed: 0,
         ignored: 0,
-        unknown: 0
+        unknown: 0,
       },
       results: [
         {
@@ -117,10 +117,10 @@ test("extractTasksFromPlays", () => {
           host: { id: 3, name: "localhost", alias: "localhost" },
           started: "2019-05-17T16:55:07.993741",
           ended: "2019-05-17T16:55:09.695842",
-          status: "ok"
-        }
+          status: "ok",
+        },
       ],
-      task_id: 5
+      task_id: 5,
     },
     {
       name: "Gathering Facts",
@@ -133,7 +133,7 @@ test("extractTasksFromPlays", () => {
         unreachable: 0,
         changed: 0,
         ignored: 0,
-        unknown: 0
+        unknown: 0,
       },
       task_id: 6,
       results: [
@@ -143,7 +143,7 @@ test("extractTasksFromPlays", () => {
           host: { id: 5, name: "host3", alias: null },
           started: "2019-05-17T16:55:10.330416",
           ended: "2019-05-17T16:55:11.263736",
-          status: "ok"
+          status: "ok",
         },
         {
           id: 7,
@@ -151,7 +151,7 @@ test("extractTasksFromPlays", () => {
           host: { id: 6, name: "host2", alias: null },
           started: "2019-05-17T16:55:10.330416",
           ended: "2019-05-17T16:55:11.421475",
-          status: "ok"
+          status: "ok",
         },
         {
           id: 8,
@@ -159,10 +159,10 @@ test("extractTasksFromPlays", () => {
           host: { id: 7, name: "host1", alias: null },
           started: "2019-05-17T16:55:10.330416",
           ended: "2019-05-17T16:55:12.195753",
-          status: "ok"
-        }
-      ]
-    }
+          status: "ok",
+        },
+      ],
+    },
   ];
   expect(extractTasksFromPlays(plays)).toEqual(expectedTasks);
 });

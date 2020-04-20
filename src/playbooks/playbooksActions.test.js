@@ -16,13 +16,13 @@ it("getPlaybooks", () => {
     count: 1,
     next: null,
     previous: null,
-    results: [{ id: "p1" }]
+    results: [{ id: "p1" }],
   });
   const expectedActions = [
     {
       type: types.FETCH_PLAYBOOKS,
-      playbooks: [{ id: "p1" }]
-    }
+      playbooks: [{ id: "p1" }],
+    },
   ];
   const store = mockStore({ config: { apiURL: "https://api.example.org" } });
   return store.dispatch(getPlaybooks()).then(() => {

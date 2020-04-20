@@ -16,7 +16,7 @@ class App extends Component {
   _isMounted = false;
 
   state = {
-    isLoading: true
+    isLoading: true,
   };
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class App extends Component {
     store
       .dispatch(getConfig())
       .then(() => store.dispatch(checkAuthentification()))
-      .catch(error => {
+      .catch((error) => {
         if (this._isMounted) {
           console.error(error);
         }

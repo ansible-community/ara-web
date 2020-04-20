@@ -3,7 +3,7 @@ import {
   global_danger_color_100,
   global_success_color_100,
   global_active_color_100,
-  global_warning_color_100
+  global_warning_color_100,
 } from "@patternfly/react-tokens";
 
 const Status = ({ status, children }) => {
@@ -14,7 +14,7 @@ const Status = ({ status, children }) => {
     unreachable: global_warning_color_100.value,
     changed: global_active_color_100.value,
     ignored: global_warning_color_100.value,
-    unknown: global_warning_color_100.value
+    unknown: global_warning_color_100.value,
   };
   return (
     <span
@@ -30,8 +30,8 @@ const Statuses = ({ statuses }) => {
   return (
     <div>
       {Object.keys(statuses)
-        .filter(status => statuses[status] !== 0)
-        .map(status => (
+        .filter((status) => statuses[status] !== 0)
+        .map((status) => (
           <Status status={status}>{`${statuses[status]} ${status}`}</Status>
         ))}
     </div>
@@ -40,11 +40,11 @@ const Statuses = ({ statuses }) => {
 
 export default class TaskRow extends Component {
   state = {
-    isExpanded: false
+    isExpanded: false,
   };
 
   toggleExpand = () => {
-    this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
+    this.setState((prevState) => ({ isExpanded: !prevState.isExpanded }));
   };
   render() {
     const { isExpanded } = this.state;
@@ -54,8 +54,9 @@ export default class TaskRow extends Component {
         <tr>
           <td className="pf-c-table__toggle">
             <button
-              className={`pf-c-button pf-m-plain ${isExpanded &&
-                "pf-m-expanded"}`}
+              className={`pf-c-button pf-m-plain ${
+                isExpanded && "pf-m-expanded"
+              }`}
               aria-label="Details"
               aria-controls={`expandable task ${task.name}`}
               aria-expanded={isExpanded ? "true" : "false"}
@@ -75,13 +76,15 @@ export default class TaskRow extends Component {
           </td>
         </tr>
         <tr
-          className={`pf-c-table__expandable-row ${isExpanded &&
-            "pf-m-expanded"}`}
+          className={`pf-c-table__expandable-row ${
+            isExpanded && "pf-m-expanded"
+          }`}
         >
           <td colspan="5" className="pf-u-p-0">
             <div
-              className={`pf-c-table__expandable-row-content ${isExpanded &&
-                "pf-m-expanded"}`}
+              className={`pf-c-table__expandable-row-content ${
+                isExpanded && "pf-m-expanded"
+              }`}
             >
               <table
                 className="pf-c-table pf-m-compact pf-m-no-border-rows"
@@ -98,7 +101,7 @@ export default class TaskRow extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {task.results.map(result => (
+                  {task.results.map((result) => (
                     <tr>
                       <td
                         data-label="Status"

@@ -19,7 +19,7 @@ export default class Tasks extends Component {
             <td className="pf-u-text-align-center">Status</td>
           </tr>
         </thead>
-        {tasks.map(task => (
+        {tasks.map((task) => (
           <TaskRow task={task} />
         ))}
       </table>

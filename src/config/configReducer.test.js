@@ -11,8 +11,8 @@ it("SET_CONFIG", () => {
     {
       type: types.SET_CONFIG,
       config: {
-        apiURL: "http://example.org"
-      }
+        apiURL: "http://example.org",
+      },
     }
   );
   expect(state.apiURL).toBe("http://example.org");

@@ -4,17 +4,17 @@ import {
   Card,
   CardBody,
   PageSection,
-  PageSectionVariants
+  PageSectionVariants,
 } from "@patternfly/react-core";
 
 export default class LoadingPage extends Component {
   state = {
-    seconds: 0
+    seconds: 0,
   };
 
   tick() {
-    this.setState(state => ({
-      seconds: state.seconds + 1
+    this.setState((state) => ({
+      seconds: state.seconds + 1,
     }));
   }
 

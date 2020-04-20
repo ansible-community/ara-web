@@ -1,7 +1,7 @@
 import {
   setCredentials,
   getCredentials,
-  removeCredentials
+  removeCredentials,
 } from "./localStorage";
 
 it("localStorage getCredentials", () => {
@@ -11,7 +11,7 @@ it("localStorage getCredentials", () => {
 it("localStorage setCredentials getCredentials removeCredentials", () => {
   const credentials = {
     username: "foo",
-    password: "bar"
+    password: "bar",
   };
   setCredentials(credentials);
   expect(getCredentials()).toEqual(credentials);

@@ -9,7 +9,7 @@ const axiosMock = new axiosMockAdapter(axios);
 
 it("renders without crashing", () => {
   axiosMock.onGet("config.json").reply(200, {
-    apiURL: "http://localhost:8000"
+    apiURL: "http://localhost:8000",
   });
   const div = document.createElement("div");
   ReactDOM.render(<App />, div);
