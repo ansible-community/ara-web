@@ -190,7 +190,7 @@ export default class Playbook extends Component {
                   </Label>
                 ))}
               </Labels>
-              <Duration>
+              <Duration className="pf-u-mr-md">
                 <CalendarAltIcon />
                 <span className="pf-u-ml-sm">
                   {new Date(playbook.started).toUTCString()}
@@ -199,7 +199,7 @@ export default class Playbook extends Component {
               <Duration>
                 <ClockIcon />
                 <span className="pf-u-ml-sm">
-                  {Math.round(playbook.duration)} sec
+                  {playbook.duration}
                 </span>
               </Duration>
             </PlaybookContent>
