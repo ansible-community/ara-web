@@ -4,19 +4,19 @@
   "private": true,
   "homepage": "http://localhost:3000/",
   "dependencies": {
-    "@patternfly/patternfly": "^2.6.14",
-    "@patternfly/react-core": "^3.16.10",
-    "@patternfly/react-icons": "^3.9.2",
-    "@patternfly/react-tokens": "^2.5.1",
-    "axios": "^0.18.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.0.1",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "^3.0.1",
-    "redux": "^4.0.0",
+    "@patternfly/patternfly": "^2.71.5",
+    "@patternfly/react-core": "^3.153.3",
+    "@patternfly/react-icons": "^3.15.16",
+    "@patternfly/react-tokens": "^2.8.12",
+    "axios": "^0.19.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
+    "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,9 +27,9 @@
     "prettier": "prettier --write \"src/**/*.js\""
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.15.0",
-    "prettier": "^1.17.1",
-    "redux-mock-store": "^1.5.3"
+    "axios-mock-adapter": "^1.18.1",
+    "prettier": "^2.0.4",
+    "redux-mock-store": "^1.5.4"
   },
   "browserslist": [
     ">0.2%",
