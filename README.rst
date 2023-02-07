@@ -1,3 +1,15 @@
+THIS PROJECT IS ARCHIVED
+========================
+
+ara-web was meant to be a react+patternfly javascript interface to the `ara <https://github.com/ansible-community/ara-web>` API.
+
+It used to work but due to lack of time, interest, traction and contributors, ara-web has not kept up with the API changes
+and the features provided by the built-in ara reporting interface.
+
+ara-web is now retired to avoid confusing users and contributors alike.
+
+For more information, see this issue: https://github.com/ansible-community/ara-web/issues/45
+
 ara-web
 =======
 
